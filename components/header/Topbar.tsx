@@ -18,7 +18,7 @@ const languages = [
 
 export default function Topbar() {
   return (
-    <div className="py-2 flex items-center justify-between">
+    <div className="py-2 mb-11.25 flex items-center justify-between">
       <div className="flex gap-6.75">
         <Link href="tel:+998907583833" className="flex items-center gap-2">
           <Phone size={16} />

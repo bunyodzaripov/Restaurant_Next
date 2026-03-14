@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { gilroy } from "./fonts";
-import Header from "@/components/header/Header";
 import Topbar from "@/components/header/Topbar";
 import "./globals.css";
 
@@ -45,9 +44,8 @@ export default function RootLayout({
           />
         </div>
 
-        <div className="containers">
+        <div className="max-w-325 mx-auto px-3">
           <Topbar />
-          <Header />
           {children}
         </div>
       </body>
