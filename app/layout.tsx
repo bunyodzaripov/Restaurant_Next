@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import { gilroy } from "./fonts";
 import "./globals.css";
-import Header from "@/components/Header";
+import { Header, Topbar } from "@/components";
 import Image from "next/image";
+import { Geist } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
   title: "Restaurant",
@@ -15,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={cn("font-sans", geist.variable)}>
       <body className={`antialiased ${gilroy.className}`}>
         <div className="fixed inset-0 -z-10 flex flex-col">
           <div className="relative flex-1">
@@ -45,6 +49,7 @@ export default function RootLayout({
         </div>
 
         <div className="containers">
+          <Topbar />
           <Header />
           {children}
         </div>
