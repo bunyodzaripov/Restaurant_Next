@@ -1,5 +1,6 @@
 import GlassEffectBg from "@/components/common/GlassEffectBg";
 import Header from "@/components/header/Header";
+import BookingSection from "@/components/home/BookingSection";
 import HeroSection from "@/components/home/HeroSection";
 import PopularFoods from "@/components/home/PopularFoods";
 
@@ -12,6 +13,7 @@ export default function HomePage() {
       </GlassEffectBg>
 
       <PopularFoods />
+      <BookingSection />
     </>
   );
 }
