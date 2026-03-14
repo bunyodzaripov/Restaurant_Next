@@ -1,30 +1,62 @@
+"use client";
+
+import { Phone, Mail, User } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import Link from "next/link";
+
+const languages = [
+  { value: "ru", label: "Русский", flag: "🇷🇺" },
+  { value: "uz", label: "O'zbek", flag: "🇺🇿" },
+  { value: "en", label: "English", flag: "eng" },
+];
+
 export default function Topbar() {
   return (
-    <div className="w-full px-6 py-2 flex items-center justify-between text-sm text-gray-700">
-      <div className="flex items-center gap-6">
-        <a
-          href="tel:+998907583833"
-          className="flex items-center gap-2 hover:text-black transition"
-        >
-          📞 +998(90)758 38 33
-        </a>
-        <a
+    <div className="py-2 flex items-center justify-between">
+      <div className="flex gap-6.75">
+        <Link href="tel:+998907583833" className="flex items-center gap-2">
+          <Phone size={16} />
+          +998(90)758 38 33
+        </Link>
+        <Link
           href="mailto:info@bmgsoft.com"
           className="flex items-center gap-2 hover:text-black transition"
         >
-          ✉️ info@bmgsoft.com
-        </a>
+          <Mail size={16} />
+          info@bmgsoft.com
+        </Link>
       </div>
 
-      <div className="flex items-center gap-4">
-        <select className="bg-transparent border-none outline-none cursor-pointer text-sm">
-          <option value="ru">🇷🇺 Русский</option>
-          <option value="uz">🇺🇿 o`zbek</option>
-          <option value="en">🇬🇧 English</option>
-        </select>
-        <button className="bg-black text-white text-xs px-4 py-1.5 rounded-full hover:bg-gray-800 transition">
+      <div className="flex items-center gap-3">
+        <DropdownMenu>
+          <DropdownMenuTrigger className="flex items-center gap-2 px-3 py-1.5 rounded-md cursor-pointer outline-none">
+            Русский
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            {languages.map((lang) => (
+              <DropdownMenuItem
+                key={lang.value}
+                className="gap-2 cursor-pointer"
+              >
+                {lang.flag} {lang.label}
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
+
+        <Button
+          variant="default"
+          className={"bg-black text-white cursor-pointer"}
+        >
+          <User size={16} />
           Вход в аккаунт
-        </button>
+        </Button>
       </div>
     </div>
   );

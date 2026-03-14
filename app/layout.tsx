@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
-import { gilroy } from "./fonts";
-import "./globals.css";
-import { Header, Topbar } from "@/components";
 import Image from "next/image";
-import { Geist } from "next/font/google";
-import { cn } from "@/lib/utils";
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+import { gilroy } from "./fonts";
+import Header from "@/components/header/Header";
+import Topbar from "@/components/header/Topbar";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Restaurant",
@@ -19,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("font-sans", geist.variable)}>
+    <html lang="en">
       <body className={`antialiased ${gilroy.className}`}>
         <div className="fixed inset-0 -z-10 flex flex-col">
           <div className="relative flex-1">
@@ -40,10 +37,10 @@ export default function RootLayout({
             />
           </div>
           <div
-            className="absolute inset-0 backdrop-blur-md"
+            className="absolute inset-0 backdrop-blur-lg"
             style={{
               background:
-                "linear-gradient(to right, rgba(255,255,255,0.1), rgba(255,255,255,0.4))",
+                "linear-gradient(to right, rgba(255,255,255,0.4), rgba(255,255,255,0.4))",
             }}
           />
         </div>
