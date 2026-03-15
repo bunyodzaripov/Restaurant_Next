@@ -1,13 +1,8 @@
 "use client";
 
-import { Phone, Mail, User } from "lucide-react";
+import { useState } from "react";
+import { Phone, Mail, User, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 
 const languages = [
@@ -17,6 +12,10 @@ const languages = [
 ];
 
 export default function Topbar() {
+  const [selectedLang, setSelectedLang] = useState("ru");
+
+  const currentLang = languages.find((l) => l.value === selectedLang);
+
   return (
     <div className="py-2 mb-11.25 flex items-center justify-between">
       <div className="flex gap-6.75">
@@ -34,25 +33,30 @@ export default function Topbar() {
       </div>
 
       <div className="flex items-center gap-3">
-        <DropdownMenu>
-          <DropdownMenuTrigger className="flex items-center gap-2 px-3 py-1.5 rounded-md cursor-pointer outline-none">
-            Русский
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+        <div className="relative flex items-center">
+          <span className="pointer-events-none absolute left-2">
+            {currentLang?.flag}
+          </span>
+          <select
+            value={selectedLang}
+            onChange={(e) => setSelectedLang(e.target.value)}
+            className="pl-8 pr-6 py-1.5 rounded-md bg-transparent cursor-pointer outline-none appearance-none text-sm"
+          >
             {languages.map((lang) => (
-              <DropdownMenuItem
-                key={lang.value}
-                className="gap-2 cursor-pointer"
-              >
-                {lang.flag} {lang.label}
-              </DropdownMenuItem>
+              <option key={lang.value} value={lang.value}>
+                {lang.label}
+              </option>
             ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
+          </select>
+          <ChevronDown
+            size={14}
+            className="pointer-events-none absolute right-1"
+          />
+        </div>
 
         <Button
           variant="default"
-          className={"bg-black text-white cursor-pointer"}
+          className="bg-black text-white cursor-pointer"
         >
           <User size={16} />
           Вход в аккаунт

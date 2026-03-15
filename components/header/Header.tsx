@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Heart, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import NavLinks from "@/components/header/NavLinks";
+import AppBreadcrumb from "@/components/common/Breadcrumb";
 
 export default function Header() {
   return (
@@ -32,6 +33,9 @@ export default function Header() {
             </span>
           </Button>
         </div>
+      </div>
+      <div className="mt-20">
+        <AppBreadcrumb />
       </div>
     </header>
   );
