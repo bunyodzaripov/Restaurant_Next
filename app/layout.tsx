@@ -3,6 +3,7 @@ import Image from "next/image";
 import { gilroy } from "./fonts";
 import Topbar from "@/components/header/Topbar";
 import "./globals.css";
+import Footer from "@/components/footer/Footer";
 
 export const metadata: Metadata = {
   title: "Restaurant",
@@ -16,38 +17,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased ${gilroy.className}`}>
-        <div className="fixed inset-0 -z-10 flex flex-col">
-          <div className="relative flex-1">
-            <Image
-              src="/images/body-bg-1.png"
-              alt="background 1"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-          <div className="relative flex-1">
-            <Image
-              src="/images/body-bg-2.png"
-              alt="background 2"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div
-            className="absolute inset-0 backdrop-blur-lg"
-            style={{
-              background:
-                "linear-gradient(to right, rgba(255,255,255,0.4), rgba(255,255,255,0.4))",
-            }}
-          />
-        </div>
+      <body className={`antialiased ${gilroy.className} relative`}>
+        <div
+          className="absolute inset-0 -z-10 backdrop-blur-lg"
+          style={{ background: "rgba(255,255,255,0.2)" }}
+        />
 
         <div className="max-w-325 mx-auto px-3">
           <Topbar />
           {children}
         </div>
+        <Footer />
       </body>
     </html>
   );
