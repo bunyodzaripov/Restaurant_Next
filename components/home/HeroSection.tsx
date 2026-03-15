@@ -16,9 +16,9 @@ export default function HeroSection() {
         <Image
           src="/images/hero-img.png"
           alt="food"
-          className="object-cover"
-          width={700}
-          height={700}
+          className="object-cover w-full h-auto"
+          width={600}
+          height={609}
           priority
         />
       </div>
