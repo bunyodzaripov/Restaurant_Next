@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import { gilroy } from "./fonts";
+import { gilroy } from "@/app/fonts";
 import Topbar from "@/components/header/Topbar";
-import "./globals.css";
 import Footer from "@/components/footer/Footer";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Restaurant",
@@ -20,13 +19,14 @@ export default function RootLayout({
       <body className={`antialiased ${gilroy.className} relative`}>
         <div
           className="absolute inset-0 -z-10 backdrop-blur-lg"
-          style={{ background: "rgba(255,255,255,0.2)" }}
+          style={{ background: "rgba(255,255,255,0.3)" }}
         />
 
         <div className="max-w-325 mx-auto px-3">
           <Topbar />
           {children}
         </div>
+
         <Footer />
       </body>
     </html>

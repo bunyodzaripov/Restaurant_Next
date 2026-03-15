@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Heart, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import NavLinks from "./NavLinks";
+import NavLinks from "@/components/header/NavLinks";
 
 export default function Header() {
   return (

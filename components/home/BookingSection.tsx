@@ -85,7 +85,7 @@ export default function BookingSection() {
       </div>
 
       <Image
-        src="/images/booking-img-2.png"
+        src="/images/booking-img.png"
         alt="Pizza"
         width={736}
         height={736}

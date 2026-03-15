@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import ShadcnButton from "../common/ShadcnButton";
+import ShadcnButton from "@/components/common/ShadcnButton";
 
 export default function HeroSection() {
   return (
