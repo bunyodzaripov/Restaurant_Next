@@ -1,12 +1,13 @@
 import GlassEffectBg from "@/components/common/GlassEffectBg";
 import Header from "@/components/header/Header";
+import NewsGrid from "@/components/news/NewsGrid";
 
 const News = () => {
   return (
     <>
       <GlassEffectBg>
         <Header />
-        <h1>News</h1>
+        <NewsGrid />
       </GlassEffectBg>
     </>
   );

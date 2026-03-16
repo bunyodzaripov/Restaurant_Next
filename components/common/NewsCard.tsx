@@ -14,8 +14,8 @@ export default function NewsCard({
   authorName,
 }: NewsCardProps) {
   return (
-    <div className="backdrop-blur-lg bg-white/30 rounded-[30px] ">
-      <div className="relative -top-15 left-4">
+    <div className="relative pt-30 backdrop-blur-lg bg-white/30 rounded-[30px] ">
+      <div className="absolute -top-15 left-4">
         <Image src={image} alt={authorName} width={213} height={157} />
       </div>
 

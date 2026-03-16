@@ -30,7 +30,7 @@ const news = [
 
 export default function NewsGallerySection() {
   return (
-    <section className="py-17.75">
+    <section className="mt-17.75">
       <h2 className="text-[48px] font-extrabold text-center text-black">
         Новости/Галерея
       </h2>

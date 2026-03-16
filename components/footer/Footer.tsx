@@ -29,7 +29,7 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="relative">
+    <footer className="relative mt-17.5">
       <Image
         src="/images/footer-bg.png"
         alt="footer background"
