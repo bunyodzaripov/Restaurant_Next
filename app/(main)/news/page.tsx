@@ -1,5 +1,6 @@
 import GlassEffectBg from "@/components/common/GlassEffectBg";
 import Header from "@/components/header/Header";
+import GalleryGrid from "@/components/news/GalleryGrid";
 import NewsGrid from "@/components/news/NewsGrid";
 
 const News = () => {
@@ -8,6 +9,7 @@ const News = () => {
       <GlassEffectBg>
         <Header />
         <NewsGrid />
+        <GalleryGrid />
       </GlassEffectBg>
     </>
   );

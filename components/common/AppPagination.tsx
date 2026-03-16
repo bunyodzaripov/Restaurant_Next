@@ -31,7 +31,7 @@ export default function AppPagination({
   const pages = getPages(currentPage, totalPages);
 
   return (
-    <Pagination>
+    <Pagination className="gap-3">
       <PaginationContent>
         {currentPage > 1 && (
           <PaginationItem>

@@ -116,9 +116,9 @@ export default function NewsGrid() {
 
   return (
     <section className="py-10">
-      <h1 className="text-[48px] font-extrabold text-center text-black mb-15">
+      <h2 className="text-[48px] font-extrabold text-center text-black mb-15">
         Новости
-      </h1>
+      </h2>
 
       <div className="grid grid-cols-3 gap-11.75 gap-x-10 gap-y-30 mt-30">
         {paginated.map((item) => (
