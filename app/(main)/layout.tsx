@@ -17,7 +17,7 @@ export default function MainLayout({
     >
       <div className="max-w-325 mx-auto px-3">
         <Topbar />
-        <main className="flex-1">{children}</main>
+        <main>{children}</main>
       </div>
 
       <Footer />

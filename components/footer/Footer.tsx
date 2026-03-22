@@ -28,7 +28,15 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="relative mt-17.5">
+    <footer
+      className="relative mt-17.5"
+      style={{
+        backgroundImage: `url('/images/footer-bg.png')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <div className="max-w-325 mx-auto px-3 relative p-17.5 grid grid-cols-4 gap-12 ">
         <div className="flex flex-col gap-4 w-fit">
           <Link href="/" className="text-[48px] font-black text-black ">
