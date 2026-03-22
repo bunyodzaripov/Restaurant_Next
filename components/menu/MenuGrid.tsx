@@ -154,9 +154,9 @@ export default function MenuGrid() {
 
   return (
     <section className="py-10">
-      <h1 className="text-[48px] font-extrabold text-center text-black mb-15">
+      <h2 className="text-[48px] font-extrabold text-center text-black mb-15">
         Меню
-      </h1>
+      </h2>
 
       <div className="flex justify-center">
         <ToggleGroup

@@ -15,13 +15,12 @@ export default function ShadcnButton({
   href = "/",
 }: ShadcnButtonProps) {
   return (
-    <Link href={href}>
+    <Link href={href} className={cn("flex", className)}>
       <Button
         variant="default"
         className={cn(
           "bg-black gap-3 text-white text-[18px] font-semibold px-8 py-6 cursor-pointer",
           "rounded-br-none",
-          className,
         )}
       >
         {label} <ArrowRight />
