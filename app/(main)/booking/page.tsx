@@ -3,6 +3,7 @@ import BookingForm from "@/components/common/BookingForm";
 import ContactUs from "@/components/common/ContactUs";
 import GlassEffectBg from "@/components/common/GlassEffectBg";
 import Header from "@/components/header/Header";
+import NewsGallerySection from "@/components/home/NewsGallerySection";
 
 const Booking = () => {
   return (
@@ -18,6 +19,7 @@ const Booking = () => {
         />
         <ContactUs title="Связаться с нами" className="my-13.5" />
       </GlassEffectBg>
+      <NewsGallerySection />
     </>
   );
 };
