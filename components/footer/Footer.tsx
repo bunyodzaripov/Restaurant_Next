@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import {
   Send,
   MessageCircle,
@@ -30,14 +29,6 @@ const socials = [
 export default function Footer() {
   return (
     <footer className="relative mt-17.5">
-      <Image
-        src="/images/footer-bg.png"
-        alt="footer background"
-        fill
-        className="object-cover -z-10"
-      />
-      <div className="absolute inset-0 backdrop-blur-sm bg-white/40" />
-
       <div className="max-w-325 mx-auto px-3 relative p-17.5 grid grid-cols-4 gap-12 ">
         <div className="flex flex-col gap-4 w-fit">
           <Link href="/" className="text-[48px] font-black text-black ">

@@ -17,17 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`antialiased ${gilroy.className} relative`}>
-        <div
-          className="absolute inset-0 -z-10 backdrop-blur-lg"
-          style={{ background: "rgba(255,255,255,0.3)" }}
-        />
-
-        <div className="max-w-325 mx-auto px-3">
-          <Topbar />
-          {children}
-        </div>
-
-        <Footer />
+        {children}
       </body>
     </html>
   );
