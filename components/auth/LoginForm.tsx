@@ -7,54 +7,44 @@ import Link from "next/link";
 
 export default function LoginForm() {
   return (
-    <div className="relative backdrop-blur-md bg-white/30 border border-white/40 rounded-2xl px-10 py-12 w-90 flex flex-col items-center gap-6">
-      {/* Ikonka */}
-      <div className="absolute -top-8 w-16 h-16 rounded-full bg-black border-4 border-white/60 flex items-center justify-center">
-        <Utensils size={28} className="text-white" />
+    <div className="w-115.75 relative backdrop-blur-md bg-white/30 rounded-[31px] p-14 flex flex-col gap-8">
+      <div className="absolute w-27.75 h-27.75 border-8 border-[#B6B1AF] rounded-full bg-black flex items-center justify-center -top-8">
+        <Utensils size={45} className="text-white" />
       </div>
 
-      {/* Sarlavha */}
-      <h1 className="mt-6 text-2xl font-bold text-gray-900">Вход в аккаунт</h1>
+      <h1 className="mt-10 text-[32px] font-bold text-black">Вход в аккаунт</h1>
 
-      {/* Inputlar */}
       <div className="w-full flex flex-col gap-5">
-        <div className="border-b border-gray-500">
+        <div className="border-b border-black">
           <Input
             placeholder="Ваше имя пользователя"
-            className="border-none shadow-none bg-transparent px-0 placeholder:text-gray-500 focus-visible:ring-0"
+            className="border-none shadow-none bg-transparent px-0 placeholder:text-[#585858] focus-visible:ring-0"
           />
         </div>
-        <div className="border-b border-gray-500">
+        <div className="border-b border-black">
           <Input
             type="password"
             placeholder="Пароль"
-            className="border-none shadow-none bg-transparent px-0 placeholder:text-gray-500 focus-visible:ring-0"
+            className="border-none shadow-none bg-transparent px-0 placeholder:text-[#585858] focus-visible:ring-0"
           />
         </div>
       </div>
 
-      {/* Parolni unutdim */}
-      <div className="w-full -mt-2">
-        <Link
-          href="#"
-          className="text-xs text-gray-500 hover:text-black transition"
-        >
+      <div className="w-full -mt-6">
+        <Link href="#" className="text-xs text-black font-semibold">
           Забыли пароль?
         </Link>
       </div>
 
-      {/* Tugma */}
-      <Button className="w-full rounded-full bg-black text-white hover:bg-zinc-800 cursor-pointer">
-        Вход в аккаунт
-      </Button>
+      <div className="flex flex-col justify-center items-center gap-3">
+        <Button className="w-42.25 px-6.25 py-7 rounded-[13px] bg-black text-white cursor-pointer">
+          Вход в аккаунт
+        </Button>
 
-      {/* Register link */}
-      <Link
-        href="/register"
-        className="text-xs text-gray-500 hover:text-black transition"
-      >
-        Еще нет учетной записи?
-      </Link>
+        <Link href="/register" className="text-xs text-black font-semibold">
+          Еще нет учетной записи?
+        </Link>
+      </div>
     </div>
   );
 }
