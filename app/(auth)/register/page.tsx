@@ -5,29 +5,35 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-
-const fields = [
-  { name: "firstName", placeholder: "Ваше имя", type: "text" },
-  { name: "lastName", placeholder: "Фамилия", type: "text" },
-  { name: "phone", placeholder: "Ваш номер телефона", type: "tel" },
-  { name: "username", placeholder: "Ваше имя пользователя", type: "text" },
-  { name: "password", placeholder: "Пароль", type: "password" },
-  {
-    name: "confirmPassword",
-    placeholder: "Подтвердите пароль",
-    type: "password",
-  },
-];
+import { register } from "@/service/auth";
+import { useRouter } from "next/navigation";
 
 const inputClass =
   "border-none shadow-none bg-transparent px-0 placeholder:text-gray-500 focus-visible:ring-0";
 
 export default function RegisterForm() {
-  const [form, setForm] = useState<Record<string, string>>({});
+  const router = useRouter();
+
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [agreed, setAgreed] = useState(false);
 
-  const handleChange = (name: string, value: string) => {
-    setForm((prev) => ({ ...prev, [name]: value }));
+  const handleSubmit = async () => {
+    try {
+      const data = await register({
+        firstName,
+        lastName,
+        email,
+        username,
+        password,
+      });
+      router.push("/login");
+    } catch (err: unknown) {
+      console.log("BACKEND ERROR MESSAGE:", err);
+    }
   };
 
   return (
@@ -37,17 +43,51 @@ export default function RegisterForm() {
       </h1>
 
       <div className="flex flex-col gap-10">
-        {fields.map((field) => (
-          <div key={field.name} className="border-b border-black">
-            <Input
-              type={field.type}
-              placeholder={field.placeholder}
-              value={form[field.name] || ""}
-              onChange={(e) => handleChange(field.name, e.target.value)}
-              className={inputClass}
-            />
-          </div>
-        ))}
+        <div className="border-b border-black">
+          <Input
+            type="text"
+            placeholder="Ваше имя"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            className={inputClass}
+          />
+        </div>
+        <div className="border-b border-black">
+          <Input
+            type="text"
+            placeholder="Фамилия"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            className={inputClass}
+          />
+        </div>
+        <div className="border-b border-black">
+          <Input
+            type="email"
+            placeholder="Ваш электронная почта"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className={inputClass}
+          />
+        </div>
+        <div className="border-b border-black">
+          <Input
+            type="text"
+            placeholder="Ваше имя пользователя"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className={inputClass}
+          />
+        </div>
+        <div className="border-b border-black">
+          <Input
+            type="password"
+            placeholder="Пароль"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className={inputClass}
+          />
+        </div>
       </div>
 
       <div className="flex items-start gap-2">
@@ -62,7 +102,10 @@ export default function RegisterForm() {
         </label>
       </div>
       <div className="flex flex-col gap-2 items-center">
-        <Button className="w-42.25 px-6.25 py-7 rounded-[13px] bg-black text-white cursor-pointer">
+        <Button
+          onClick={handleSubmit}
+          className="w-42.25 px-6.25 py-7 rounded-[13px] bg-black text-white cursor-pointer"
+        >
           Вход в аккаунт
         </Button>
 

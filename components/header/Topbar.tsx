@@ -54,13 +54,15 @@ export default function Topbar() {
           />
         </div>
 
-        <Button
-          variant="default"
-          className="bg-black text-white cursor-pointer"
-        >
-          <User size={16} />
-          Вход в аккаунт
-        </Button>
+        <Link href="/login">
+          <Button
+            variant="default"
+            className="bg-black text-white cursor-pointer"
+          >
+            <User size={16} />
+            Вход в аккаунт
+          </Button>
+        </Link>
       </div>
     </div>
   );
