@@ -3,12 +3,16 @@ import Header from "@/components/header/Header";
 import NewsGallerySection from "@/components/home/NewsGallerySection";
 import MenuGrid from "@/components/menu/MenuGrid";
 
-const Menu = () => {
+interface PageProps {
+  searchParams: Promise<{ categoryId?: string }>;
+}
+
+const Menu = ({ searchParams }: PageProps) => {
   return (
     <>
       <GlassEffectBg>
         <Header />
-        <MenuGrid />
+        <MenuGrid searchParams={searchParams} />
       </GlassEffectBg>
       <NewsGallerySection />
     </>

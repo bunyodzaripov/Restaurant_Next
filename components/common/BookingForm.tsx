@@ -1,3 +1,5 @@
+"use client";
+
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -7,16 +9,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Link from "next/link";
-import ShadcnButton from "@/components/common/ShadcnButton";
 import { cn } from "@/lib/utils";
-
-interface BookingFormProps {
-  className?: string;
-  title?: string;
-  titleClassName?: string;
-  icon?: React.ReactNode;
-  buttonClassName?: string;
-}
+import { useState } from "react";
+import { BookingFormProps } from "@/types";
+import { createBooking } from "@/service/booking";
+import { Button } from "../ui/button";
 
 export default function BookingForm({
   className,
@@ -25,6 +22,33 @@ export default function BookingForm({
   icon,
   buttonClassName,
 }: BookingFormProps) {
+  const [email, setEmail] = useState<string>("");
+  const [reservationDate, setReservationDate] = useState<string>("");
+  const [reservationTime, setReservationTime] = useState<string>("");
+  const [guestCount, setGuestCount] = useState<number>(0);
+  const [tableId, setTableId] = useState<number>(0);
+
+  const handleSubmit = async () => {
+    try {
+      const res = await createBooking({
+        email,
+        guestCount,
+        reservationDate,
+        reservationTime,
+        tableId,
+      });
+      alert(res.message);
+
+      setEmail("");
+      setGuestCount(0);
+      setReservationDate("");
+      setReservationTime("");
+      setTableId(0);
+    } catch (err: unknown) {
+      alert(err);
+    }
+  };
+
   return (
     <div className={cn("flex flex-col gap-8.25", className)}>
       {icon && (
@@ -32,7 +56,6 @@ export default function BookingForm({
           {icon}
         </div>
       )}
-
       {title && (
         <h2 className={cn("text-black", titleClassName, icon && "mt-5.75")}>
           {title}
@@ -41,13 +64,19 @@ export default function BookingForm({
 
       <div className="border-b border-black">
         <Input
-          placeholder="Ваш номер"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Ваш электронной почты"
           className="border-none shadow-none bg-transparent px-0 placeholder:text-[#585858] focus-visible:ring-0"
         />
       </div>
 
       <div className="border-b border-black">
-        <Select>
+        <Select
+          value={guestCount}
+          onValueChange={(e) => setGuestCount(Number(e))}
+        >
           <SelectTrigger className="w-full border-none shadow-none bg-transparent px-0 focus:ring-0 text-[#585858]">
             <SelectValue placeholder="На сколько человек?" />
           </SelectTrigger>
@@ -63,6 +92,8 @@ export default function BookingForm({
 
       <div className="border-b border-black">
         <Input
+          value={reservationDate}
+          onChange={(e) => setReservationDate(e.target.value)}
           type="date"
           className="border-none shadow-none bg-transparent px-0 placeholder:text-[#585858] focus-visible:ring-0 text-[#585858]"
         />
@@ -70,6 +101,8 @@ export default function BookingForm({
 
       <div className="border-b border-black">
         <Input
+          value={reservationTime}
+          onChange={(e) => setReservationTime(e.target.value)}
           type="time"
           className="border-none shadow-none bg-transparent px-0 placeholder:text-[#585858] focus-visible:ring-0 text-[#585858]"
         />
@@ -77,14 +110,14 @@ export default function BookingForm({
 
       <div>
         <div className="border-b border-black">
-          <Select>
+          <Select value={tableId} onValueChange={(e) => setTableId(Number(e))}>
             <SelectTrigger className="w-full border-none shadow-none bg-transparent px-0 focus:ring-0 text-[#585858]">
               <SelectValue placeholder="Выберите место" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="hall">Зал</SelectItem>
-              <SelectItem value="terrace">Терраса</SelectItem>
-              <SelectItem value="vip">VIP зал</SelectItem>
+              <SelectItem value="1">Зал</SelectItem>
+              <SelectItem value="2">Терраса</SelectItem>
+              <SelectItem value="3">VIP зал</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -96,11 +129,18 @@ export default function BookingForm({
         </Link>
       </div>
 
-      <ShadcnButton
-        className={cn(buttonClassName)}
-        label="Забронировать"
-        href="/booking"
-      />
+      <div className="flex justify-end">
+        <Button
+          onClick={() => handleSubmit()}
+          variant="default"
+          className={cn(
+            "bg-black gap-3 text-white text-[18px] font-semibold px-8 py-6 cursor-pointer rounded-br-none ",
+            buttonClassName,
+          )}
+        >
+          Забронировать
+        </Button>
+      </div>
     </div>
   );
 }

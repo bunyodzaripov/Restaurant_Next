@@ -1,34 +1,12 @@
 import NewsCard from "@/components//common/NewsCard";
 import ShadcnButton from "@/components/common/ShadcnButton";
+import { getAll } from "@/service/getAll";
+import { News } from "@/types";
 
-const news = [
-  {
-    id: 1,
-    image: "/images/news-1.png",
-    description:
-      "Используйте гибкие структуры, чтобы предоставить надежный обзор для обзоров высокого уровня. Итеративные подходы к данным корпоративной.",
-    authorImage: "/images/news-avatar-1.png",
-    authorName: "Сергей",
-  },
-  {
-    id: 2,
-    image: "/images/news-2.png",
-    description:
-      "Используйте гибкие структуры, чтобы предоставить надежный обзор для обзоров высокого уровня. Итеративные подходы к данным корпоративной.",
-    authorImage: "/images/news-avatar-1.png",
-    authorName: "Сергей",
-  },
-  {
-    id: 3,
-    image: "/images/news-3.png",
-    description:
-      "Используйте гибкие структуры, чтобы предоставить надежный обзор для обзоров высокого уровня. Итеративные подходы к данным корпоративной.",
-    authorImage: "/images/news-avatar-1.png",
-    authorName: "Сергей",
-  },
-];
+export default async function NewsGallerySection() {
+  const { data } = await getAll("news");
+  const news = data.slice(0, 3);
 
-export default function NewsGallerySection() {
   return (
     <section className="mt-17.75">
       <h2 className="text-[48px] font-extrabold text-center text-black">
@@ -36,13 +14,13 @@ export default function NewsGallerySection() {
       </h2>
 
       <div className="grid grid-cols-3 gap-27.5 mt-30">
-        {news.map((item) => (
+        {news.map((item: News) => (
           <NewsCard
             key={item.id}
             image={item.image}
             description={item.description}
-            authorImage={item.authorImage}
-            authorName={item.authorName}
+            authorImage={item.author.avatar}
+            authorName={item.author.firstName}
           />
         ))}
       </div>

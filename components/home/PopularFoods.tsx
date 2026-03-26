@@ -7,60 +7,12 @@ import {
 } from "@/components/ui/carousel";
 import FoodCard from "@/components/common/FoodCard";
 import ShadcnButton from "@/components/common/ShadcnButton";
+import { getAll } from "@/service/getAll";
+import { Products } from "@/types";
 
-const foods = [
-  {
-    id: 1,
-    image: "/images/food-1.png",
-    name: "Chicken soup",
-    description: "Spicy with garlic",
-    price: "$10.00",
-  },
-  {
-    id: 2,
-    image: "/images/food-2.png",
-    name: "Chicken soup",
-    description: "Spicy with garlic",
-    price: "$10.00",
-  },
-  {
-    id: 3,
-    image: "/images/food-1.png",
-    name: "Chicken soup",
-    description: "Spicy with garlic",
-    price: "$10.00",
-  },
-  {
-    id: 4,
-    image: "/images/food-2.png",
-    name: "Chicken soup",
-    description: "Spicy with garlic",
-    price: "$10.00",
-  },
-  {
-    id: 5,
-    image: "/images/food-1.png",
-    name: "Chicken soup",
-    description: "Spicy with garlic",
-    price: "$10.00",
-  },
-  {
-    id: 6,
-    image: "/images/food-1.png",
-    name: "Chicken soup",
-    description: "Spicy with garlic",
-    price: "$10.00",
-  },
-  {
-    id: 7,
-    image: "/images/food-1.png",
-    name: "Chicken soup",
-    description: "Spicy with garlic",
-    price: "$10.00",
-  },
-];
+export default async function PopularFoods() {
+  const { data } = await getAll("products");
 
-export default function PopularFoods() {
   return (
     <section className="mt-16">
       <h2 className="text-[48px] font-extrabold text-center text-black mb-12">
@@ -69,7 +21,7 @@ export default function PopularFoods() {
 
       <Carousel opts={{ align: "start", loop: true }} className="relative">
         <CarouselContent className="mt-14 pb-4">
-          {foods.map((item) => (
+          {data.map((item: Products) => (
             <CarouselItem key={item.id} className="basis-1/4 pl-8">
               <FoodCard
                 image={item.image}

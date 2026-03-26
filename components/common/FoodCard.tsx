@@ -26,7 +26,12 @@ export default function FoodCard({
       )}
     >
       <div className="relative -mt-20 ">
-        <Image src={image} alt={name} width={239} height={239} />
+        <Image
+          src={`https://anorkhulov.uz/${image}`}
+          alt={name}
+          width={239}
+          height={239}
+        />
       </div>
 
       <div className="flex justify-between items-center">

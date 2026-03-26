@@ -11,7 +11,12 @@ export default function GalleryCard({
 }: GalleryCardProps) {
   return (
     <div className="relative w-full h-50 rounded-[20px] overflow-hidden">
-      <Image src={image} alt={alt} fill className="object-cover" />
+      <Image
+        src={`https://anorkhulov.uz/${image}`}
+        alt={alt}
+        fill
+        className="object-cover"
+      />
     </div>
   );
 }
