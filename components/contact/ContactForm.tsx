@@ -1,6 +1,10 @@
+"use client";
+
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import ShadcnButton from "@/components/common/ShadcnButton";
+import { useState } from "react";
+import { Button } from "../ui/button";
+import { sendContact } from "@/service/contact";
 
 interface ContactFormProps {
   title?: string;
@@ -10,6 +14,26 @@ const inputClass =
   "text-[18px] bg-transparent border border-black rounded-none px-6 py-5 placeholder:text-[#585858] focus-visible:ring-0 focus-visible:border-gray-black resize-none";
 
 export default function ContactForm({ title }: ContactFormProps) {
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
+
+  const handleSubmit = async () => {
+    try {
+      const data = await sendContact({ name, email, phone, message });
+      alert(data.message);
+
+      setName("");
+      setEmail("");
+      setPhone("");
+      setMessage("");
+    } catch (err: unknown) {
+      alert(err);
+      console.log(err);
+    }
+  };
+
   return (
     <section className="mt-19">
       <h2 className="text-[48px] font-extrabold text-center text-black mb-15">
@@ -17,21 +41,44 @@ export default function ContactForm({ title }: ContactFormProps) {
       </h2>
 
       <div className="flex flex-col gap-5 w-201 mx-auto">
-        <Input placeholder="Ваше имя" className={inputClass} />
-        <Input type="email" placeholder="Ваш E-mail" className={inputClass} />
         <Input
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Ваше имя"
+          className={inputClass}
+        />
+        <Input
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          type="email"
+          placeholder="Ваш E-mail"
+          className={inputClass}
+        />
+        <Input
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
           type="tel"
           placeholder="Ваш номер телефона"
           className={inputClass}
         />
         <Textarea
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
           placeholder="Ваше сообщение"
           rows={3}
           className={inputClass}
         />
 
-        <div className="flex justify-end mt-2">
-          <ShadcnButton label="Отправить" href="#" />
+        <div className="flex justify-end">
+          <Button
+            onClick={() => handleSubmit()}
+            variant="default"
+            className={
+              "bg-black gap-3 text-white text-[18px] font-semibold px-8 py-6 cursor-pointer"
+            }
+          >
+            Отправить
+          </Button>
         </div>
       </div>
     </section>

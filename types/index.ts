@@ -53,3 +53,18 @@ export interface Categories {
   id: number;
   name: string;
 }
+
+export interface Team {
+  id: number;
+  firstName: string;
+  lastName: string;
+  position: string;
+  avatar: string;
+}
+
+export type Contact = {
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+};
