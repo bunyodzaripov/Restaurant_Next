@@ -18,6 +18,9 @@ export interface Products {
   price: string;
   image: string;
   categoryId?: number;
+  category: { name: string };
+  rating?: number;
+  reviewsCount?: number;
 }
 
 export interface News {

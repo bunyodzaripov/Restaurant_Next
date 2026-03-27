@@ -10,7 +10,7 @@ export default function GlassEffectBg({
   return (
     <div
       className={cn(
-        "backdrop-blur-lg bg-white/40 rounded-[50px] p-17 shadow-sm",
+        "backdrop-blur-lg bg-white/40 rounded-[50px] p-15 shadow-sm",
         className,
       )}
     >

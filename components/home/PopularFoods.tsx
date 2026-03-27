@@ -24,6 +24,7 @@ export default async function PopularFoods() {
           {data.map((item: Products) => (
             <CarouselItem key={item.id} className="basis-1/4 pl-8">
               <FoodCard
+                id={item.id}
                 image={item.image}
                 name={item.name}
                 description={item.description}

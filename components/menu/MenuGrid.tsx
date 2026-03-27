@@ -30,6 +30,7 @@ export default async function MenuGrid({ searchParams }: Props) {
         {products.map((item: Products) => (
           <div key={item.id} className="flex justify-center">
             <FoodCard
+              id={item.id}
               image={item.image}
               name={item.name}
               description={item.description}
