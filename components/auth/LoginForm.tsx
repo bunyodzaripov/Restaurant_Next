@@ -21,6 +21,10 @@ export default function LoginForm() {
 
       router.push("/");
       setCookie("accessToken", data.data.accessToken);
+      setCookie(
+        "user",
+        `${data.data.user.firstName} ${data.data.user.lastName}`,
+      );
     } catch (err: unknown | string) {
       console.log("ERROR:", err);
     }

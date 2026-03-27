@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Phone, Mail, User, ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Phone, Mail, ChevronDown } from "lucide-react";
 import Link from "next/link";
+import UserButton from "./UserButton";
 
 const languages = [
   { value: "ru", label: "Русский", flag: "🇷🇺" },
@@ -54,15 +54,7 @@ export default function Topbar() {
           />
         </div>
 
-        <Link href="/login">
-          <Button
-            variant="default"
-            className="bg-black text-white cursor-pointer"
-          >
-            <User size={16} />
-            Вход в аккаунт
-          </Button>
-        </Link>
+        <UserButton />
       </div>
     </div>
   );

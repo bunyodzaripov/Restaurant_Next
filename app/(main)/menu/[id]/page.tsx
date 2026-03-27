@@ -1,5 +1,6 @@
 import GlassEffectBg from "@/components/common/GlassEffectBg";
 import Header from "@/components/header/Header";
+import PopularFoods from "@/components/home/PopularFoods";
 import ProductDetail from "@/components/menu/ProductDetail";
 import { getAll } from "@/service/getAll";
 
@@ -19,6 +20,7 @@ export default async function SingleProduct({ params }: Props) {
         <Header />
         <ProductDetail product={productData} />
       </GlassEffectBg>
+      <PopularFoods />
     </>
   );
 }

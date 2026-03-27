@@ -31,7 +31,7 @@ export default function FoodCard({
           className,
         )}
       >
-        <div className="relative -mt-20 ">
+        <div className="relative -mt-20">
           <Image
             src={`https://anorkhulov.uz/${image}`}
             alt={name}

@@ -26,7 +26,7 @@ export default async function MenuGrid({ searchParams }: Props) {
 
       <MenuContent categories={categoriesRes.data} />
 
-      <div className="grid grid-cols-4 gap-x-12 gap-y-20">
+      <div className="grid grid-cols-4 gap-x-12 gap-y-20 mt-30">
         {products.map((item: Products) => (
           <div key={item.id} className="flex justify-center">
             <FoodCard
