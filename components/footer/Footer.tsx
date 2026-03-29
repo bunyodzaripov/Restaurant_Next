@@ -31,7 +31,7 @@ export default function Footer() {
     <footer
       className="relative mt-17.5"
       style={{
-        backgroundImage: `url('/images/footer-bg.png')`,
+        background: `url('/images/footer-bg.png')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
