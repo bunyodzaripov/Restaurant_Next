@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { gilroy } from "@/app/fonts";
+import { gilroy } from "@/fonts/fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
