@@ -12,12 +12,7 @@ export default function BookingSection() {
         icon={<Utensils size={55} className="text-white" />}
       />
 
-      <Image
-        src="/images/booking-img.png"
-        alt="Pizza"
-        width={736}
-        height={736}
-      />
+      <Image src="/booking-img.png" alt="Pizza" width={736} height={736} />
     </section>
   );
 }

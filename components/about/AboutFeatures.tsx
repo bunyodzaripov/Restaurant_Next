@@ -5,7 +5,7 @@ const features = [
   {
     id: 1,
     title: "Наша еда",
-    image: "/images/about-img-1.png",
+    image: "/about-img-1.png",
     imagePosition: "right",
     button: true,
     paragraphs: [
@@ -16,7 +16,7 @@ const features = [
   {
     id: 2,
     title: "Наш путь",
-    image: "/images/about-img-2.png",
+    image: "/about-img-2.png",
     imagePosition: "left",
     button: false,
     paragraphs: [

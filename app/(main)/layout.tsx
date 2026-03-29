@@ -9,7 +9,7 @@ export default function MainLayout({
   return (
     <div
       style={{
-        backgroundImage: `url('/images/main-bg.png')`,
+        background: `url('/main-bg.png')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",

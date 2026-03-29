@@ -7,7 +7,7 @@ export default function AuthLayout({
     <div
       className="min-h-screen flex items-center justify-center"
       style={{
-        background: `url('/images/auth-bg.png')`,
+        background: `url('/auth-bg.png')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",

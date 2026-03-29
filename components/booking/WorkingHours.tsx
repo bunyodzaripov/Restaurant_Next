@@ -33,7 +33,7 @@ export default function WorkingHours() {
 
         <div className="relative w-126 h-169 rounded-2xl overflow-hidden shrink-0">
           <Image
-            src="/images/booking-img-2.png"
+            src="/booking-img-2.png"
             alt="Restaurant"
             fill
             className="object-cover"
