@@ -9,15 +9,14 @@ import FoodCard from "@/components/common/FoodCard";
 import ShadcnButton from "@/components/common/ShadcnButton";
 import { getAll } from "@/service/getAll";
 import { Products } from "@/types";
+import Title from "../common/Title";
 
 export default async function PopularFoods() {
   const { data } = await getAll("products");
 
   return (
     <section className="mt-16">
-      <h2 className="text-[48px] font-extrabold text-center text-black mb-12">
-        Популярные блюда
-      </h2>
+      <Title title="Популярные блюда" />
 
       <Carousel opts={{ align: "start", loop: true }} className="relative">
         <CarouselContent className="mt-14 pb-4">

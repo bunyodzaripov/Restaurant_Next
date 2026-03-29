@@ -5,15 +5,7 @@ import { HeartIcon, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-
-interface FoodCardProps {
-  id: number;
-  image: string;
-  name: string;
-  description: string;
-  price: string;
-  className?: string;
-}
+import { FoodCardProps } from "@/types";
 
 export default function FoodCard({
   id,
@@ -37,6 +29,7 @@ export default function FoodCard({
             alt={name}
             width={239}
             height={239}
+            loading="eager"
           />
         </div>
 

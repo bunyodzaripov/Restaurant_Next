@@ -6,6 +6,7 @@ import {
   ChefHat,
   HeartHandshake,
 } from "lucide-react";
+import Title from "../common/Title";
 
 const reasons = [
   {
@@ -55,9 +56,7 @@ const reasons = [
 export default function WhyUsSection() {
   return (
     <section className="mt-10">
-      <h2 className="text-[48px] text-center font-extrabold text-black">
-        Почему именно мы?
-      </h2>
+      <Title title="Почему выбирают нас?" />
 
       <div className="grid grid-cols-3 gap-x-18 gap-y-23 mt-17">
         {reasons.map((reason) => {

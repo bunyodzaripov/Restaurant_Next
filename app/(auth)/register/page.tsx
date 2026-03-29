@@ -30,6 +30,7 @@ export default function RegisterForm() {
         username,
         password,
       });
+      console.log(data);
       router.push("/login");
     } catch (err: unknown) {
       console.log("BACKEND ERROR MESSAGE:", err);

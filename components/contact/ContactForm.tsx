@@ -5,9 +5,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { sendContact } from "@/service/contact";
+import Title from "../common/Title";
 
 interface ContactFormProps {
-  title?: string;
+  title: string;
 }
 
 const inputClass =
@@ -36,9 +37,7 @@ export default function ContactForm({ title }: ContactFormProps) {
 
   return (
     <section className="mt-19">
-      <h2 className="text-[48px] font-extrabold text-center text-black mb-15">
-        {title}
-      </h2>
+      <Title title={title} />
 
       <div className="flex flex-col gap-5 w-201 mx-auto">
         <Input

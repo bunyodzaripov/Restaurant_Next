@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Star, Minus, Plus } from "lucide-react";
 import Link from "next/link";
 import { Products } from "@/types";
+import Title from "../common/Title";
 
 interface Props {
   product: Products;
@@ -16,9 +17,7 @@ export default function ProductDetail({ product }: Props) {
 
   return (
     <section className="py-10">
-      <h2 className="text-[48px] font-extrabold text-center text-black mb-15">
-        {product.category.name}
-      </h2>
+      <Title title={product.category.name} />
 
       <div className="flex items-center justify-between gap-10">
         <div className="relative w-125 h-125 shrink-0">

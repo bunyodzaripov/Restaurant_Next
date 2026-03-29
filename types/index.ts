@@ -71,3 +71,25 @@ export type Contact = {
   phone: string;
   message: string;
 };
+
+export interface FoodCardProps {
+  id: number;
+  image: string;
+  name: string;
+  description: string;
+  price: string;
+  className?: string;
+}
+
+export interface NewsCardProps {
+  image: string;
+  description: string;
+  authorImage: string;
+  authorName: string;
+}
+
+export interface ShadcnButtonProps {
+  label: string;
+  href?: string;
+  className?: string;
+}

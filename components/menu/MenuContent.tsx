@@ -14,7 +14,8 @@ export default function MenuContent({
 
   const currentCategory = searchParams.get("categoryId") || "";
 
-  const handleFilter = (value: string) => {
+  const handleFilter = (groupValue: string[]) => {
+    const value = groupValue[0];
     const params = new URLSearchParams(searchParams.toString());
 
     if (value) {
@@ -29,8 +30,7 @@ export default function MenuContent({
   return (
     <div className="flex justify-center mb-10">
       <ToggleGroup
-        type="single"
-        value={currentCategory}
+        value={[currentCategory]}
         onValueChange={handleFilter}
         className="inline-flex items-center bg-white/30 backdrop-blur-sm rounded-full px-5 py-3"
       >

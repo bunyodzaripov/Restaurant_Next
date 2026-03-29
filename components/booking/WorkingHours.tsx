@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Title from "../common/Title";
 
 const hours = [
   { day: "Понедельник", time: "10:00–23:00" },
@@ -12,9 +13,7 @@ const hours = [
 export default function WorkingHours() {
   return (
     <section className="mt-8">
-      <h2 className="text-[48px] font-extrabold text-center text-black mb-15">
-        Бронирование
-      </h2>
+      <Title title="Бронирование" />
 
       <div className="flex items-center gap-29.5 mt-14">
         <div className="flex-1">

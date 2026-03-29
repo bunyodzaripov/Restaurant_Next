@@ -1,11 +1,5 @@
+import { NewsCardProps } from "@/types";
 import Image from "next/image";
-
-interface NewsCardProps {
-  image: string;
-  description: string;
-  authorImage: string;
-  authorName: string;
-}
 
 export default function NewsCard({
   image,

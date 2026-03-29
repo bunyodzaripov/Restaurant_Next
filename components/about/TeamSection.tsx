@@ -1,15 +1,14 @@
 import { getAll } from "@/service/getAll";
 import { Team } from "@/types";
 import Image from "next/image";
+import Title from "../common/Title";
 
 export default async function TeamSection() {
   const { data } = await getAll("cook");
 
   return (
     <section className="mt-14.25">
-      <h2 className="text-[48px] font-extrabold text-center text-black mb-15">
-        Наша команда
-      </h2>
+      <Title title="Наша команда" />
 
       <div className="grid grid-cols-3 gap-x-31.25 gap-y-20">
         {data.map((member: Team) => (

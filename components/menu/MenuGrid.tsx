@@ -2,6 +2,7 @@ import FoodCard from "@/components/common/FoodCard";
 import { getAll } from "@/service/getAll";
 import { Products } from "@/types";
 import MenuContent from "./MenuContent";
+import Title from "../common/Title";
 
 interface Props {
   searchParams: Promise<{ categoryId?: string }>;
@@ -20,9 +21,7 @@ export default async function MenuGrid({ searchParams }: Props) {
 
   return (
     <section className="py-10">
-      <h2 className="text-[48px] font-extrabold text-center text-black mb-10">
-        Меню
-      </h2>
+      <Title title="Меню" />
 
       <MenuContent categories={categoriesRes.data} />
 

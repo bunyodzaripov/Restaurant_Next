@@ -1,9 +1,10 @@
 import { cn } from "@/lib/utils";
 import { MailCheck, PhoneCall, MapPinned } from "lucide-react";
 import Link from "next/link";
+import Title from "./Title";
 
 interface ContactUsProps {
-  title?: string;
+  title: string;
   className?: string;
 }
 
@@ -37,9 +38,7 @@ const contacts = [
 export default function ContactUs({ title, className }: ContactUsProps) {
   return (
     <section className={cn(className)}>
-      <h2 className="text-[48px] font-extrabold text-center text-black mb-20">
-        {title}
-      </h2>
+      <Title title={title} />
 
       <div className="grid grid-cols-3 gap-32 w-201 mx-auto">
         {contacts.map((contact) => {

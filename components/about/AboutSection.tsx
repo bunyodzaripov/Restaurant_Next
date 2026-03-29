@@ -1,3 +1,5 @@
+import Title from "../common/Title";
+
 interface AboutSectionProps {
   title?: string;
 }
@@ -5,9 +7,7 @@ interface AboutSectionProps {
 export default function AboutSection({ title = "О нас" }: AboutSectionProps) {
   return (
     <section className="mt-7.75">
-      <h2 className="text-[48px] font-extrabold text-center text-black mb-12">
-        {title}
-      </h2>
+      <Title title={title} />
 
       <div className="flex flex-col gap-6">
         <p className="text-[20px] text-black">

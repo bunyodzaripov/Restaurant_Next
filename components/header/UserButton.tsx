@@ -1,5 +1,6 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
 import { User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -10,8 +11,11 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 
+const getUser = () => getCookie("user") as string | undefined;
+const subscribe = () => () => {};
+
 export default function UserButton() {
-  const user = getCookie("user");
+  const user = useSyncExternalStore(subscribe, getUser, () => undefined);
 
   const handleLogout = () => {
     deleteCookie("user");
@@ -32,6 +36,7 @@ export default function UserButton() {
       </Link>
     );
   }
+
   return (
     <HoverCard>
       <HoverCardTrigger>
@@ -40,7 +45,6 @@ export default function UserButton() {
           {user}
         </button>
       </HoverCardTrigger>
-
       <HoverCardContent align="end" className="w-40 p-2">
         <Button
           variant="ghost"

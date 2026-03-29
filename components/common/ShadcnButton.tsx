@@ -2,12 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-
-interface ShadcnButtonProps {
-  label: string;
-  href?: string;
-  className?: string;
-}
+import { ShadcnButtonProps } from "@/types";
 
 export default function ShadcnButton({
   label,
