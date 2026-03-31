@@ -25,9 +25,9 @@ export default function CartItem({ item, onDelete, onUpdate }: Props) {
       </div>
 
       <div className="flex-1">
-        <h3 className="font-bold text-gray-900 text-lg">{item.product.name}</h3>
-        <p className="text-sm text-gray-500">
-          {item.unitPrice.toLocaleString()} so`m
+        <h3 className="font-bold text-black text-2xl">{item.product.name}</h3>
+        <p className="text-base text-black">
+          {item.unitPrice.toLocaleString()} сум
         </p>
       </div>
 
@@ -38,29 +38,30 @@ export default function CartItem({ item, onDelete, onUpdate }: Props) {
           disabled={item.quantity <= 1}
           className="w-8 h-8 rounded-full border border-gray-400 flex items-center justify-center hover:bg-white/50 transition disabled:opacity-50"
         >
-          <Minus size={14} />
+          <Minus size={16} />
         </Button>
-        <span className="font-semibold w-6 text-center">{item.quantity}</span>
+        <span className="font-semibold w-6 text-center text-lg">
+          {item.quantity}
+        </span>
         <Button
           variant={"ghost"}
           onClick={() => onUpdate(item.id, item.quantity + 1)}
           className="w-8 h-8 rounded-full border border-gray-400 flex items-center justify-center hover:bg-white/50 transition"
         >
-          <Plus size={14} />
+          <Plus size={16} />
         </Button>
       </div>
 
-      <p className="font-bold text-gray-900 text-lg w-28 text-right">
-        {item.totalPrice.toLocaleString()} so`m
+      <p className="font-semibold text-black text-lg w-28 text-right">
+        {item.totalPrice.toLocaleString()} сум
       </p>
 
-      <Button
-        variant={"destructive"}
+      <button
         onClick={() => onDelete(item.id)}
-        className="w-9 h-9 rounded-full flex items-center justify-center hover:bg-red-50 transition text-red-400 hover:text-red-600"
+        className="flex items-center cursor-pointer justify-center hover:text-red-500 transition"
       >
-        <Trash2 size={18} />
-      </Button>
+        <Trash2 size={20} />
+      </button>
     </div>
   );
 }

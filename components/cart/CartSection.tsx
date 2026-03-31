@@ -36,15 +36,8 @@ export default function CartSection({ cart }: Props) {
   if (cart.items.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-20 gap-4">
-        <ShoppingBag size={64} className="text-gray-300" />
-        <p className="text-gray-500 text-lg">Savatcha bo`sh</p>
-        <Button
-          variant="default"
-          onClick={() => router.push("/menu")}
-          className="bg-black text-white rounded-full px-6 py-2 hover:bg-zinc-800 cursor-pointer"
-        >
-          Menuga o`tish
-        </Button>
+        <ShoppingBag size={64} className="text-black/70" />
+        <p className="text-black/70 text-lg">Корзина пуста</p>
       </div>
     );
   }
@@ -65,13 +58,13 @@ export default function CartSection({ cart }: Props) {
           ))}
         </div>
 
-        <div className="backdrop-blur-md bg-white/30 border border-white/40 rounded-2xl p-6 w-72 flex flex-col gap-4 sticky top-4">
-          <h2 className="text-xl font-bold text-gray-900">Подсчет</h2>
+        <div className="backdrop-blur-md bg-white/30 rounded-2xl p-6 w-80 flex flex-col gap-4 sticky top-4">
+          <h2 className="text-2xl font-bold text-black">Подсчет</h2>
 
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-4">
             {cart.items.map((item) => (
               <div
-                className="flex justify-between text-sm text-gray-600 border-b border-black pb-2"
+                className="flex justify-between text-base text-black border-b border-black pb-2.5"
                 key={item.id}
               >
                 <span>
@@ -80,8 +73,7 @@ export default function CartSection({ cart }: Props) {
                 <span>{item.totalPrice.toLocaleString()} сум</span>
               </div>
             ))}
-            <div className="h-px bg-gray-200" />
-            <div className="flex justify-between font-bold text-gray-900">
+            <div className="flex justify-between font-bold text-lg text-black">
               <span>Итого:</span>
               <span>{cart.subtotal.toLocaleString()} сум</span>
             </div>
@@ -89,7 +81,7 @@ export default function CartSection({ cart }: Props) {
 
           <Button
             onClick={() => router.push("/checkout")}
-            className="w-full bg-black text-white rounded-full py-6 hover:bg-zinc-800 cursor-pointer"
+            className="w-full text-base bg-black text-white rounded-xl py-6 hover:bg-zinc-800 cursor-pointer"
           >
             Оформить заказ
           </Button>
