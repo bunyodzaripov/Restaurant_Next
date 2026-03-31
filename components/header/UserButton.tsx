@@ -20,6 +20,7 @@ export default function UserButton() {
   const handleLogout = () => {
     deleteCookie("user");
     deleteCookie("accessToken");
+    deleteCookie("userId");
     window.location.reload();
   };
 

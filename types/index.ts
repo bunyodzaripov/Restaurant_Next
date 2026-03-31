@@ -93,3 +93,56 @@ export interface ShadcnButtonProps {
   href?: string;
   className?: string;
 }
+
+export interface CartProduct {
+  id: number;
+  image: string;
+  name: string;
+  price: number;
+  isAvailable: boolean;
+}
+
+export interface CartItem {
+  id: number;
+  product: CartProduct;
+  quantity: number;
+  totalPrice: number;
+  unitPrice: number;
+  name: string;
+}
+
+export interface Cart {
+  id: number;
+  status: string;
+  subtotal: number;
+  itemCount: number;
+  items: CartItem[];
+}
+
+export interface AddToCart {
+  userId: number;
+  productId: number;
+  quantity: number;
+}
+
+export interface OrderPayload {
+  userId: number;
+  customerId: number;
+  guestCount: number;
+  customerName: string;
+  customerEmail: string;
+  type: string;
+  paymentMethod: string;
+}
+
+interface OrderItem {
+  productId: number;
+  quantity: number;
+}
+
+export interface CreateOrderPayload {
+  customerId: number;
+  paymentMethod: string;
+  deliveryAddress: string;
+  items: OrderItem[];
+}

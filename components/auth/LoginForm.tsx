@@ -25,6 +25,7 @@ export default function LoginForm() {
         "user",
         `${data.data.user.firstName} ${data.data.user.lastName}`,
       );
+      setCookie("userId", data.data.user.id);
     } catch (err: unknown | string) {
       console.log("ERROR:", err);
     }

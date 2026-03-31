@@ -11,7 +11,6 @@ interface Props {
 export default async function MenuGrid({ searchParams }: Props) {
   const params = await searchParams;
   const categoryIdStr = params.categoryId;
-  console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
 
   const [categoriesRes, productsRes] = await Promise.all([
     getAll("categories"),

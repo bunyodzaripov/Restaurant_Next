@@ -3,8 +3,12 @@ import { Heart, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import NavLinks from "@/components/header/NavLinks";
 import AppBreadcrumb from "@/components/common/Breadcrumb";
+import { Badge } from "@/components/ui/badge";
+import { getCart } from "@/service/cartGet";
 
-export default function Header() {
+export default async function Header() {
+  const cart = await getCart();
+
   return (
     <header>
       <div className="flex items-center justify-between ">
@@ -22,16 +26,21 @@ export default function Header() {
           >
             <Heart size={33} className="text-black" />
           </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="rounded-full cursor-pointer border border-black hover:bg-white/40 relative"
-          >
-            <ShoppingCart size={33} className="text-black" />
-            <span className="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] w-3 h-3 rounded-full flex items-center justify-center">
-              1
-            </span>
-          </Button>
+          <Link href="/cart">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="rounded-full cursor-pointer border border-black hover:bg-white/40 relative"
+            >
+              <ShoppingCart size={33} className="text-black" />
+              <Badge
+                variant="default"
+                className="absolute -top-3 -right-3 bg-red-500"
+              >
+                {cart ? cart.data.items.length : 0}
+              </Badge>
+            </Button>
+          </Link>
         </div>
       </div>
       <div className="mt-20">

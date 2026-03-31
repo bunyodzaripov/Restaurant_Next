@@ -17,6 +17,7 @@ const pathNames: Record<string, string> = {
   booking: "Бронирование",
   about: "О нас",
   contact: "Контакты",
+  cart: "Корзина",
 };
 
 export default function AppBreadcrumb() {

@@ -6,6 +6,9 @@ import { Star, Minus, Plus } from "lucide-react";
 import Link from "next/link";
 import { Products } from "@/types";
 import Title from "../common/Title";
+import { Button } from "../ui/button";
+import { addToCart } from "@/service/cart";
+import { getCookie } from "cookies-next";
 
 interface Props {
   product: Products;
@@ -13,7 +16,22 @@ interface Props {
 
 export default function ProductDetail({ product }: Props) {
   const [count, setCount] = useState(1);
-  console.log("product", product);
+  const userId = getCookie("userId");
+
+  async function handleAddToCart(e: React.MouseEvent<HTMLButtonElement>) {
+    try {
+      e.preventDefault();
+      const payload = {
+        userId: Number(userId),
+        productId: product.id,
+        quantity: count,
+      };
+      await addToCart(payload);
+      alert("Товар успешно добавлен в корзину");
+    } catch (error) {
+      alert("Вы не зарегистрированы");
+    }
+  }
 
   return (
     <section className="py-10">
@@ -92,9 +110,12 @@ export default function ProductDetail({ product }: Props) {
               </button>
             </div>
 
-            <button className="bg-black text-white text-[18px] font-semibold py-5 px-10 rounded-[13px] cursor-pointer">
+            <Button
+              onClick={(e) => handleAddToCart(e)}
+              className="bg-black text-white text-[18px] font-semibold py-8 px-10 rounded-[13px] cursor-pointer"
+            >
               В корзину
-            </button>
+            </Button>
           </div>
         </div>
       </div>

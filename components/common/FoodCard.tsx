@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { FoodCardProps } from "@/types";
+import { addToCart } from "@/service/cart";
+import { getCookie } from "cookies-next";
 
 export default function FoodCard({
   id,
@@ -15,6 +17,20 @@ export default function FoodCard({
   price,
   className,
 }: FoodCardProps) {
+  const userId = getCookie("userId");
+
+  async function handleAddToCart(e: React.MouseEvent<HTMLButtonElement>) {
+    try {
+      e.preventDefault();
+      e.stopPropagation();
+      const payload = { userId: Number(userId), productId: id, quantity: 1 };
+      await addToCart(payload);
+      alert("Товар успешно добавлен в корзину");
+    } catch (error) {
+      alert("Вы не зарегистрированы");
+    }
+  }
+
   return (
     <Link href={`/menu/${id}`}>
       <div
@@ -54,8 +70,7 @@ export default function FoodCard({
           <span className="font-bold text-[24px] text-black">{price}</span>
           <Button
             onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
+              handleAddToCart(e);
             }}
             size="icon"
             className="bg-black text-white p-5 cursor-pointer"
