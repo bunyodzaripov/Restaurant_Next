@@ -5,14 +5,14 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { register } from "@/service/auth";
-import { useRouter } from "next/navigation";
+import { useRegister } from "@/hooks/useAuth";
+import { toast } from "sonner";
 
 const inputClass =
   "border-none shadow-none bg-transparent px-0 placeholder:text-gray-500 focus-visible:ring-0";
 
 export default function RegisterForm() {
-  const router = useRouter();
+  const { mutate, isPending } = useRegister();
 
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
@@ -21,20 +21,26 @@ export default function RegisterForm() {
   const [password, setPassword] = useState<string>("");
   const [agreed, setAgreed] = useState(false);
 
-  const handleSubmit = async () => {
-    try {
-      const data = await register({
-        firstName,
-        lastName,
-        email,
-        username,
-        password,
-      });
-      console.log(data);
-      router.push("/login");
-    } catch (err: unknown) {
-      console.log("BACKEND ERROR MESSAGE:", err);
+  const handleSubmit = () => {
+    //react-hook-form va zod ishlatish kerak form uchun
+    if (
+      !firstName.trim() ||
+      !lastName.trim() ||
+      !email.trim() ||
+      !username.trim() ||
+      !password.trim()
+    ) {
+      toast.error("Пожалуйста, заполните все поля!");
+      return;
     }
+
+    mutate({
+      firstName,
+      lastName,
+      email,
+      username,
+      password,
+    });
   };
 
   return (
@@ -104,10 +110,11 @@ export default function RegisterForm() {
       </div>
       <div className="flex flex-col gap-2 items-center">
         <Button
+          disabled={!agreed || isPending}
           onClick={handleSubmit}
           className="w-42.25 px-6.25 py-7 rounded-[13px] bg-black text-white cursor-pointer"
         >
-          Вход в аккаунт
+          {isPending ? "Загрузка..." : "Зарегистрироваться"}
         </Button>
 
         <Link

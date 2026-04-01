@@ -5,30 +5,23 @@ import { Utensils } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { login } from "@/service/auth";
-import { useRouter } from "next/navigation";
-import { setCookie } from "cookies-next";
+import { useLogin } from "@/hooks/useAuth";
+import { toast } from "sonner";
 
 export default function LoginForm() {
-  const router = useRouter();
+  const { mutate, isPending } = useLogin();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async () => {
-    try {
-      const data = await login({ username, password });
-
-      router.push("/");
-      setCookie("accessToken", data.data.accessToken);
-      setCookie(
-        "user",
-        `${data.data.user.firstName} ${data.data.user.lastName}`,
-      );
-      setCookie("userId", data.data.user.id);
-    } catch (err: unknown | string) {
-      console.log("ERROR:", err);
+  const handleSubmit = () => {
+    //react-hook-form va zod ishlatish kerak form uchun
+    if (!username.trim() || !password.trim()) {
+      toast.error("Пожалуйста, заполните все поля!");
+      return;
     }
+
+    mutate({ username, password });
   };
 
   return (
@@ -42,7 +35,6 @@ export default function LoginForm() {
       <div className="w-full flex flex-col gap-5">
         <div className="border-b border-black">
           <Input
-            value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Ваше имя пользователя"
             className="border-none shadow-none bg-transparent px-0 placeholder:text-[#585858] focus-visible:ring-0"
@@ -67,10 +59,11 @@ export default function LoginForm() {
 
       <div className="flex flex-col justify-center items-center gap-3">
         <Button
+          disabled={isPending}
           onClick={handleSubmit}
           className="w-42.25 px-6.25 py-7 rounded-[13px] bg-black text-white cursor-pointer"
         >
-          Вход в аккаунт
+          {isPending ? "Вход..." : "Вход"}
         </Button>
 
         <Link href="/register" className="text-xs text-black font-semibold">
