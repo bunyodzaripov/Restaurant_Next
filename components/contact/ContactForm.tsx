@@ -4,8 +4,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { Button } from "../ui/button";
-import { sendContact } from "@/service/contact";
 import Title from "../common/Title";
+import { useSendContact } from "@/hooks/useSendContact";
 
 interface ContactFormProps {
   title: string;
@@ -15,24 +15,15 @@ const inputClass =
   "text-[18px] bg-transparent border border-black rounded-none px-6 py-5 placeholder:text-[#585858] focus-visible:ring-0 focus-visible:border-gray-black resize-none";
 
 export default function ContactForm({ title }: ContactFormProps) {
+  const { mutate, isPending } = useSendContact();
+
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
   const [message, setMessage] = useState<string>("");
 
-  const handleSubmit = async () => {
-    try {
-      const data = await sendContact({ name, email, phone, message });
-      alert(data.message);
-
-      setName("");
-      setEmail("");
-      setPhone("");
-      setMessage("");
-    } catch (err: unknown) {
-      alert(err);
-      console.log(err);
-    }
+  const handleSubmit = () => {
+    mutate({ name, email, phone, message });
   };
 
   return (
@@ -70,13 +61,14 @@ export default function ContactForm({ title }: ContactFormProps) {
 
         <div className="flex justify-end">
           <Button
+            disabled={isPending}
             onClick={() => handleSubmit()}
             variant="default"
             className={
               "bg-black gap-3 text-white text-[18px] font-semibold px-8 py-6 cursor-pointer"
             }
           >
-            Отправить
+            {isPending ? "Отправка..." : "Отправить"}
           </Button>
         </div>
       </div>

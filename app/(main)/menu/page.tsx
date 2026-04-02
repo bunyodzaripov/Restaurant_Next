@@ -1,22 +1,25 @@
 import GlassEffectBg from "@/components/common/GlassEffectBg";
+import Title from "@/components/common/Title";
 import Header from "@/components/header/Header";
 import NewsGallerySection from "@/components/home/NewsGallerySection";
+import MenuContent from "@/components/menu/MenuContent";
 import MenuGrid from "@/components/menu/MenuGrid";
 
-interface PageProps {
+interface Props {
   searchParams: Promise<{ categoryId?: string }>;
 }
 
-const Menu = ({ searchParams }: PageProps) => {
+export default async function Menu({ searchParams }: Props) {
+  const { categoryId } = await searchParams;
   return (
-    <>
+    <section>
       <GlassEffectBg>
         <Header />
-        <MenuGrid searchParams={searchParams} />
+        <Title title="Меню" />
+        <MenuContent />
+        <MenuGrid categoryId={categoryId} />
       </GlassEffectBg>
       <NewsGallerySection />
-    </>
+    </section>
   );
-};
-
-export default Menu;
+}

@@ -1,9 +1,14 @@
 import { api } from "@/service/api";
 
-export const getAll = async (
-  url: string,
-  params?: Record<string, string | number>,
-) => {
-  const res = await api.get(`/${url}`, { params });
+export const getAll = async (url: string) => {
+  const res = await api.get(`/${url}`);
+  return res.data;
+};
+
+export const getProducts = async (categoryId?: number | null) => {
+  const res = await api.get("/products", {
+    params: categoryId ? { categoryId } : {},
+  });
+
   return res.data;
 };

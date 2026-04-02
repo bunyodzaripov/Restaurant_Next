@@ -12,8 +12,8 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { BookingFormProps } from "@/types";
-import { createBooking } from "@/service/booking";
 import { Button } from "../ui/button";
+import { useCreateBooking } from "@/hooks/useCreateBooking";
 
 export default function BookingForm({
   className,
@@ -22,31 +22,23 @@ export default function BookingForm({
   icon,
   buttonClassName,
 }: BookingFormProps) {
+  const { mutate, isPending } = useCreateBooking();
+
   const [email, setEmail] = useState<string>("");
   const [reservationDate, setReservationDate] = useState<string>("");
   const [reservationTime, setReservationTime] = useState<string>("");
   const [guestCount, setGuestCount] = useState<number>(0);
   const [tableId, setTableId] = useState<number>(0);
 
-  const handleSubmit = async () => {
-    try {
-      const res = await createBooking({
-        email,
-        guestCount,
-        reservationDate,
-        reservationTime,
-        tableId,
-      });
-      alert(res.message);
-
-      setEmail("");
-      setGuestCount(0);
-      setReservationDate("");
-      setReservationTime("");
-      setTableId(0);
-    } catch (err: unknown) {
-      alert(err);
-    }
+  const handleSubmit = () => {
+    //react-hook-form va zod ishlatish kerak form uchun
+    mutate({
+      email,
+      reservationDate,
+      reservationTime,
+      guestCount,
+      tableId,
+    });
   };
 
   return (
@@ -131,6 +123,7 @@ export default function BookingForm({
 
       <div className="flex justify-end">
         <Button
+          disabled={isPending}
           onClick={() => handleSubmit()}
           variant="default"
           className={cn(
@@ -138,7 +131,7 @@ export default function BookingForm({
             buttonClassName,
           )}
         >
-          Забронировать
+          {isPending ? "Забронировать..." : "Забронировать"}
         </Button>
       </div>
     </div>
