@@ -1,27 +1,28 @@
 "use client";
 
-import { useState } from "react";
 import { Utensils } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useLogin } from "@/hooks/useAuth";
-import { toast } from "sonner";
+import { useForm } from "react-hook-form";
+
+type FormData = {
+  username: string;
+  password: string;
+};
 
 export default function LoginForm() {
   const { mutate, isPending } = useLogin();
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
 
-  const handleSubmit = () => {
-    //react-hook-form va zod ishlatish kerak form uchun
-    if (!username.trim() || !password.trim()) {
-      toast.error("Пожалуйста, заполните все поля!");
-      return;
-    }
-
-    mutate({ username, password });
+  const onSubmit = (data: FormData) => {
+    mutate(data);
   };
 
   return (
@@ -32,44 +33,61 @@ export default function LoginForm() {
 
       <h1 className="mt-10 text-[32px] font-bold text-black">Вход в аккаунт</h1>
 
-      <div className="w-full flex flex-col gap-5">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="w-full flex flex-col gap-5"
+      >
         <div className="border-b border-black">
           <Input
-            onChange={(e) => setUsername(e.target.value)}
+            {...register("username", {
+              required: "Имя пользователя обязательно",
+            })}
             placeholder="Ваше имя пользователя"
             className="border-none shadow-none bg-transparent px-0 placeholder:text-[#585858] focus-visible:ring-0"
           />
         </div>
+        {errors.username && (
+          <p className="text-red-500 text-sm -mt-5">
+            {errors.username.message}
+          </p>
+        )}
+
         <div className="border-b border-black">
           <Input
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
             type="password"
+            {...register("password", {
+              required: "Пароль обязательно!",
+            })}
             placeholder="Пароль"
             className="border-none shadow-none bg-transparent px-0 placeholder:text-[#585858] focus-visible:ring-0"
           />
         </div>
-      </div>
+        {errors.password && (
+          <p className="text-red-500 text-sm -mt-5">
+            {errors.password.message}
+          </p>
+        )}
 
-      <div className="w-full -mt-6">
-        <Link href="#" className="text-xs text-black font-semibold">
-          Забыли пароль?
-        </Link>
-      </div>
+        <div className="w-full -mt-4">
+          <Link href="#" className="text-xs text-black font-semibold">
+            Забыли пароль?
+          </Link>
+        </div>
 
-      <div className="flex flex-col justify-center items-center gap-3">
-        <Button
-          disabled={isPending}
-          onClick={handleSubmit}
-          className="w-42.25 px-6.25 py-7 rounded-[13px] bg-black text-white cursor-pointer"
-        >
-          {isPending ? "Вход..." : "Вход"}
-        </Button>
+        <div className="flex flex-col justify-center items-center gap-3">
+          <Button
+            type="submit"
+            disabled={isPending}
+            className="w-42.25 px-6.25 py-7 rounded-[13px] bg-black text-white cursor-pointer"
+          >
+            {isPending ? "Вход..." : "Вход"}
+          </Button>
 
-        <Link href="/register" className="text-xs text-black font-semibold">
-          Еще нет учетной записи?
-        </Link>
-      </div>
+          <Link href="/register" className="text-xs text-black font-semibold">
+            Еще нет учетной записи?
+          </Link>
+        </div>
+      </form>
     </div>
   );
 }
