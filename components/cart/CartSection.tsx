@@ -6,7 +6,7 @@ import { ShoppingBag } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Cart } from "@/types/index";
 import Title from "../common/Title";
-import { deleteCartItem, updateCartItem } from "@/service/cart";
+import { useDeleteCartItem, useUpdateCartItem } from "@/hooks/useCart";
 
 interface Props {
   cart: Cart;
@@ -14,23 +14,15 @@ interface Props {
 
 export default function CartSection({ cart }: Props) {
   const router = useRouter();
+  const { mutate: updateCartItem } = useUpdateCartItem();
+  const { mutate: deleteCartItem } = useDeleteCartItem();
 
   async function handleDelete(id: number) {
-    try {
-      await deleteCartItem(id);
-      router.refresh();
-    } catch (error) {
-      console.error(error);
-    }
+    deleteCartItem(id);
   }
 
   async function handleUpdate(id: number, quantity: number) {
-    try {
-      await updateCartItem(id, quantity);
-      router.refresh();
-    } catch (error) {
-      console.error(error);
-    }
+    updateCartItem({ itemId: id, quantity });
   }
 
   if (cart.items.length === 0) {

@@ -7,30 +7,26 @@ import Link from "next/link";
 import { Products } from "@/types";
 import Title from "../common/Title";
 import { Button } from "../ui/button";
-import { addToCart } from "@/service/cart";
 import { getCookie } from "cookies-next";
+import { useAddToCart } from "@/hooks/useCart";
 
 interface Props {
   product: Products;
 }
 
 export default function ProductDetail({ product }: Props) {
+  const { mutate, isPending } = useAddToCart();
   const [count, setCount] = useState(1);
   const userId = getCookie("userId");
 
-  async function handleAddToCart(e: React.MouseEvent<HTMLButtonElement>) {
-    try {
-      e.preventDefault();
-      const payload = {
-        userId: Number(userId),
-        productId: product.id,
-        quantity: count,
-      };
-      await addToCart(payload);
-      alert("Товар успешно добавлен в корзину");
-    } catch (error) {
-      alert("Вы не зарегистрированы");
-    }
+  function handleAddToCart(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    const payload = {
+      userId: Number(userId),
+      productId: product.id,
+      quantity: count,
+    };
+    mutate(payload);
   }
 
   return (
@@ -111,10 +107,11 @@ export default function ProductDetail({ product }: Props) {
             </div>
 
             <Button
+              disabled={isPending}
               onClick={(e) => handleAddToCart(e)}
               className="bg-black text-white text-[18px] font-semibold py-8 px-10 rounded-[13px] cursor-pointer"
             >
-              В корзину
+              {isPending ? "Loading..." : "В корзину"}
             </Button>
           </div>
         </div>

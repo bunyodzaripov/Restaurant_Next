@@ -1,13 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { HeartIcon, ShoppingCart } from "lucide-react";
+import { HeartIcon, ShoppingCart, Loader } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { FoodCardProps } from "@/types";
-import { addToCart } from "@/service/cart";
 import { getCookie } from "cookies-next";
+import { useAddToCart } from "@/hooks/useCart";
 
 export default function FoodCard({
   id,
@@ -18,17 +18,17 @@ export default function FoodCard({
   className,
 }: FoodCardProps) {
   const userId = getCookie("userId");
+  const { mutate, isPending } = useAddToCart();
 
-  async function handleAddToCart(e: React.MouseEvent<HTMLButtonElement>) {
-    try {
-      e.preventDefault();
-      e.stopPropagation();
-      const payload = { userId: Number(userId), productId: id, quantity: 1 };
-      await addToCart(payload);
-      alert("Товар успешно добавлен в корзину");
-    } catch (error) {
-      alert("Вы не зарегистрированы");
-    }
+  function handleAddToCart(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    e.stopPropagation();
+    const payload = {
+      userId: Number(userId),
+      productId: id,
+      quantity: 1,
+    };
+    mutate(payload);
   }
 
   return (
@@ -69,13 +69,18 @@ export default function FoodCard({
         <div className="flex items-center justify-between mt-1">
           <span className="font-bold text-[24px] text-black">{price}</span>
           <Button
+            disabled={isPending}
             onClick={(e) => {
               handleAddToCart(e);
             }}
             size="icon"
             className="bg-black text-white p-5 cursor-pointer"
           >
-            <ShoppingCart size={23} />
+            {isPending ? (
+              <Loader className="animate-spin" />
+            ) : (
+              <ShoppingCart size={17} />
+            )}
           </Button>
         </div>
       </div>

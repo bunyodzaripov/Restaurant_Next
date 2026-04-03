@@ -10,18 +10,20 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import { useRouter } from "next/navigation";
 
 const getUser = () => getCookie("user") as string | undefined;
 const subscribe = () => () => {};
 
 export default function UserButton() {
+  const router = useRouter();
   const user = useSyncExternalStore(subscribe, getUser, () => undefined);
 
   const handleLogout = () => {
     deleteCookie("user");
     deleteCookie("accessToken");
     deleteCookie("userId");
-    window.location.reload();
+    router.refresh();
   };
 
   if (!user) {
@@ -40,7 +42,7 @@ export default function UserButton() {
 
   return (
     <HoverCard>
-      <HoverCardTrigger>
+      <HoverCardTrigger delay={100} closeDelay={100}>
         <button className="bg-black text-white cursor-pointer flex items-center gap-2 px-3 py-1 rounded-md">
           <User size={16} />
           {user}
@@ -50,7 +52,7 @@ export default function UserButton() {
         <Button
           variant="ghost"
           onClick={handleLogout}
-          className="w-full text-left px-3 py-2 text-sm text-red-500 hover:bg-red-50 rounded-md transition cursor-pointer"
+          className="w-full text-left px-3 py-1 text-sm text-red-500 hover:bg-red-50 rounded-md transition cursor-pointer"
         >
           Выйти
         </Button>
