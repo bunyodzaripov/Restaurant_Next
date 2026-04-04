@@ -146,3 +146,12 @@ export interface CreateOrderPayload {
   deliveryAddress: string;
   items: OrderItem[];
 }
+
+export interface RegisterData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  username: string;
+  password: string;
+  agreed: boolean;
+}
