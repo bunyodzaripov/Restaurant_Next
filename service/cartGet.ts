@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { api } from "./api";
+import api from "./api";
 
 export const getCart = async () => {
   const cookieStore = await cookies();

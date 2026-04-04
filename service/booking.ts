@@ -1,4 +1,4 @@
-import { api } from "@/service/api";
+import api from "@/service/api";
 import { Booking } from "@/types";
 
 export const createBooking = async (data: Booking) => {

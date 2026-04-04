@@ -1,4 +1,4 @@
-import { api } from "@/service/api";
+import api from "@/service/api";
 
 export const getAll = async (url: string) => {
   try {

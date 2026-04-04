@@ -1,4 +1,4 @@
-import { api } from "@/service/api";
+import api from "@/service/api";
 import { Contact } from "@/types";
 
 export const sendContact = async (data: Contact) => {

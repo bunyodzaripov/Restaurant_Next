@@ -1,4 +1,4 @@
-import { api } from "@/service/api";
+import api from "@/service/api";
 import { AddToCart, CreateOrderPayload, OrderPayload } from "@/types";
 import { getCookie } from "cookies-next";
 

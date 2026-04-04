@@ -6,14 +6,13 @@ import Title from "../common/Title";
 
 export default async function NewsGallerySection() {
   const { data } = await getAll("news");
-  const news = data.slice(0, 3);
 
   return (
     <section className="mt-17.75">
       <Title title="Новости и галерея" />
 
       <div className="grid grid-cols-3 gap-27.5 mt-30">
-        {news.map((item: News) => (
+        {data.map((item: News) => (
           <NewsCard
             key={item.id}
             image={item.image}
