@@ -12,7 +12,7 @@ export default async function NewsGallerySection() {
       <Title title="Новости и галерея" />
 
       <div className="grid grid-cols-3 gap-27.5 mt-30">
-        {data.map((item: News) => (
+        {data?.map((item: News) => (
           <NewsCard
             key={item.id}
             image={item.image}

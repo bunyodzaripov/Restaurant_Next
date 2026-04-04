@@ -11,7 +11,7 @@ export default async function TeamSection() {
       <Title title="Наша команда" />
 
       <div className="grid grid-cols-3 gap-x-31.25 gap-y-20">
-        {data.map((member: Team) => (
+        {data?.map((member: Team) => (
           <div key={member.id} className="flex flex-col items-center gap-4">
             <div className="relative p-4 w-58.25 h-58.25 rounded-full border border-black shrink-0 flex items-center justify-center">
               <Image

@@ -11,7 +11,7 @@ export default async function NewsGrid() {
       <Title title="Новости" />
 
       <div className="grid grid-cols-3 gap-11.75 gap-x-10 gap-y-30 mt-30">
-        {data.map((item: News) => (
+        {data?.map((item: News) => (
           <NewsCard
             key={item.id}
             image={item.image}

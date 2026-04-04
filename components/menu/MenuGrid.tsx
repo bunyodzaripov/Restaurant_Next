@@ -11,7 +11,7 @@ export default async function MenuGrid({
 
   return (
     <div className="grid grid-cols-4 gap-x-12 gap-y-20 mt-30">
-      {data?.data.map((item: Products) => (
+      {data?.data?.map((item: Products) => (
         <div key={item.id} className="flex justify-center">
           <FoodCard
             id={item.id}

@@ -34,7 +34,7 @@ export default function MenuContent() {
         onValueChange={(val) => val && handleChange(val)}
         className="inline-flex items-center bg-white/30 backdrop-blur-sm rounded-full px-5 py-3"
       >
-        {data?.data.map((item: Categories) => (
+        {data?.data?.map((item: Categories) => (
           <ToggleGroupItem
             key={item.id}
             value={item.id.toString()}

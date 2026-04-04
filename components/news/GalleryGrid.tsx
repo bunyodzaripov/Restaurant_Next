@@ -11,7 +11,7 @@ export default async function GalleryGrid() {
       <Title title="Галерея" />
 
       <div className="grid grid-cols-4 gap-x-6 gap-y-12">
-        {data.map((item: Gallery) => (
+        {data?.map((item: Gallery) => (
           <GalleryCard key={item.id} image={item.image} />
         ))}
       </div>

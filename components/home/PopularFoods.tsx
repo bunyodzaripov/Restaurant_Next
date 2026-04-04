@@ -20,7 +20,7 @@ export default async function PopularFoods() {
 
       <Carousel opts={{ align: "start", loop: true }} className="relative">
         <CarouselContent className="mt-14 pb-4">
-          {data.map((item: Products) => (
+          {data?.map((item: Products) => (
             <CarouselItem key={item.id} className="basis-1/4 pl-8">
               <FoodCard
                 id={item.id}
