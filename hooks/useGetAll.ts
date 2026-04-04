@@ -7,5 +7,6 @@ export const useGetAll = (url: string) => {
   return useQuery({
     queryKey: [url],
     queryFn: () => getAll(url),
+    staleTime: 1000 * 60 * 5,
   });
 };
