@@ -1,8 +1,13 @@
 import api from "@/service/api";
 
 export const getAll = async (url: string) => {
-  const res = await api.get(`/${url}`);
-  return res.data;
+  try {
+    const res = await api.get(`/${url}`);
+    return res.data ? res.data : [];
+  } catch (error) {
+    console.error(`Error fetching ${url}:`, error);
+    return [];
+  }
 };
 
 export const getProducts = async (categoryId?: number | null) => {
