@@ -8,6 +8,7 @@ import Link from "next/link";
 import { FoodCardProps } from "@/types";
 import { getCookie } from "cookies-next";
 import { useAddToCart } from "@/hooks/useCart";
+import { useState } from "react";
 
 export default function FoodCard({
   id,
@@ -17,6 +18,9 @@ export default function FoodCard({
   price,
   className,
 }: FoodCardProps) {
+  const [imgSrc, setImgSrc] = useState(
+    image ? `https://anorkhulov.uz/${image}` : "/no-img.png",
+  );
   const userId = getCookie("userId");
   const { mutate, isPending } = useAddToCart();
 
@@ -39,13 +43,14 @@ export default function FoodCard({
           className,
         )}
       >
-        <div className="relative -mt-20">
+        <div className="relative -mt-20 ">
           <Image
-            src={`https://anorkhulov.uz/${image}`}
+            src={imgSrc}
             alt={name}
             width={239}
             height={239}
             loading="eager"
+            onError={() => setImgSrc("/no-img.png")}
           />
         </div>
 

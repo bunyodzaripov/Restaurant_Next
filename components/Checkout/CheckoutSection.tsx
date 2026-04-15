@@ -35,6 +35,7 @@ export default function CheckoutSection({ cart }: Props) {
       await createOrder(payload);
       toast.success("Order created");
     } catch (error) {
+      console.log(error);
       toast.error("Something went wrong");
     }
   }

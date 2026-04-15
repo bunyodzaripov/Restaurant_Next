@@ -20,6 +20,7 @@ export default async function Header() {
 
         <div className="flex items-center gap-2">
           <Button
+            aria-label="Добавить в избранное"
             variant="ghost"
             size="icon"
             className="rounded-full cursor-pointer border border-black text-[33px] hover:bg-white/40"
@@ -28,6 +29,7 @@ export default async function Header() {
           </Button>
           <Link href="/cart">
             <Button
+              aria-label="Добавить в корзину"
               variant="ghost"
               size="icon"
               className="rounded-full cursor-pointer border border-black hover:bg-white/40 relative"

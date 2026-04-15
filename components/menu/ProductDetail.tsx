@@ -17,6 +17,9 @@ interface Props {
 export default function ProductDetail({ product }: Props) {
   const { mutate, isPending } = useAddToCart();
   const [count, setCount] = useState(1);
+  const [imgSrc, setImgSrc] = useState(
+    product.image ? `https://anorkhulov.uz/${product.image}` : "/no-img.png",
+  );
   const userId = getCookie("userId");
 
   function handleAddToCart(e: React.MouseEvent<HTMLButtonElement>) {
@@ -36,11 +39,12 @@ export default function ProductDetail({ product }: Props) {
       <div className="flex items-center justify-between gap-10">
         <div className="relative w-125 h-125 shrink-0">
           <Image
-            src={`https://anorkhulov.uz/${product.image}`}
+            src={imgSrc}
             alt={product.name}
             fill
             className="object-contain drop-shadow-2xl"
             priority
+            onError={() => setImgSrc("/no-img.png")}
           />
         </div>
 

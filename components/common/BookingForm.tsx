@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 import { BookingFormProps } from "@/types";
 import { Button } from "../ui/button";
 import { useCreateBooking } from "@/hooks/useCreateBooking";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 
 type FormData = {
   email: string;
@@ -37,18 +37,22 @@ export default function BookingForm({
       placeholder: "Ваш электронной почты",
       rules: {
         required: "Email обязателен",
+        pattern: {
+          value: /\S+@\S+\.\S+/,
+          message: "Некорректный email",
+        },
       },
     },
     {
       name: "reservationDate",
       type: "date",
-      placeholder: "",
+      placeholder: "Дата бронирования",
       rules: { required: "Дата обязателена!" },
     },
     {
       name: "reservationTime",
       type: "time",
-      placeholder: "",
+      placeholder: "Время бронирования",
       rules: { required: "Время обязательно!" },
     },
   ] as const;
@@ -59,32 +63,38 @@ export default function BookingForm({
     register,
     handleSubmit,
     setValue,
-    watch,
+    control,
     formState: { errors },
   } = useForm<FormData>({
     defaultValues: {
       guestCount: 1,
-      tableId: 1,
+      tableId: 1 || null,
     },
   });
+
+  const guestCount = useWatch({ control, name: "guestCount" });
+  const tableId = useWatch({ control, name: "tableId" });
 
   const onSubmit = (data: FormData) => {
     mutate(data);
   };
 
-  const guestCount = watch("guestCount");
-  const tableId = watch("tableId");
-
   return (
-    <div className={cn("flex flex-col gap-8.25", className)}>
+    <div className={cn("flex flex-col gap-8.25 relative", className)}>
       {icon && (
-        <div className="absolute w-27.75 h-27.75 border-8 border-[#B6B1AF] rounded-full bg-black flex items-center justify-center -top-8">
+        <div className="absolute w-27.75 h-27.75 border-8 border-[#B6B1AF] rounded-full bg-black flex items-center justify-center -top-8 left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0">
           {icon}
         </div>
       )}
 
       {title && (
-        <h2 className={cn("text-black", titleClassName, icon && "mt-5.75")}>
+        <h2
+          className={cn(
+            "text-black font-bold",
+            titleClassName,
+            icon && "mt-24 md:mt-12",
+          )}
+        >
           {title}
         </h2>
       )}
@@ -99,11 +109,12 @@ export default function BookingForm({
               {...register(field.name as keyof FormData, field.rules)}
               type={field.type}
               placeholder={field.placeholder}
+              aria-label={field.placeholder}
               className="border-none shadow-none bg-transparent px-0 placeholder:text-[#585858] focus-visible:ring-0 text-[#585858]"
             />
 
             {errors[field.name] && (
-              <p className="text-red-500 text-sm -mb-6">
+              <p className="text-red-500 text-xs mt-1">
                 {errors[field.name]?.message as string}
               </p>
             )}
@@ -112,16 +123,19 @@ export default function BookingForm({
 
         <div className="border-b border-black">
           <Select
-            value={guestCount?.toString() ?? ""}
+            value={guestCount?.toString()}
             onValueChange={(val) =>
               setValue("guestCount", Number(val), { shouldValidate: true })
             }
           >
-            <SelectTrigger className="w-full border-none shadow-none bg-transparent px-0 focus:ring-0 text-[#585858]">
+            <SelectTrigger
+              aria-label="Выберите количество гостей"
+              className="w-full border-none shadow-none bg-transparent px-0 focus:ring-0 text-[#585858]"
+            >
               <SelectValue placeholder="На сколько человек?" />
             </SelectTrigger>
             <SelectContent>
-              {[1, 2, 3, 4].map((n) => (
+              {[1, 2, 3, 4, 5, 6].map((n) => (
                 <SelectItem key={n} value={String(n)}>
                   {n} человек
                 </SelectItem>
@@ -130,15 +144,18 @@ export default function BookingForm({
           </Select>
         </div>
 
-        <div>
+        <div className="flex flex-col gap-2">
           <div className="border-b border-black">
             <Select
-              value={tableId?.toString() ?? ""}
+              value={tableId?.toString()}
               onValueChange={(val) =>
                 setValue("tableId", Number(val), { shouldValidate: true })
               }
             >
-              <SelectTrigger className="w-full border-none shadow-none bg-transparent px-0 focus:ring-0 text-[#585858]">
+              <SelectTrigger
+                aria-label="Выберите место"
+                className="w-full border-none shadow-none bg-transparent px-0 focus:ring-0 text-[#585858]"
+              >
                 <SelectValue placeholder="Выберите место" />
               </SelectTrigger>
               <SelectContent>
@@ -151,18 +168,18 @@ export default function BookingForm({
 
           <Link
             href="/booking"
-            className="text-xs text-[#06004C] hover:underline -mt-2"
+            className="text-xs text-[#06004C] hover:underline w-fit"
           >
             Выбрать место на карте
           </Link>
         </div>
 
-        <div className="flex justify-end">
+        <div className="flex justify-end mt-4">
           <Button
             type="submit"
             disabled={isPending}
             className={cn(
-              "bg-black gap-3 text-white text-[18px] font-semibold px-8 py-6 cursor-pointer rounded-br-none",
+              "bg-black gap-3 text-white text-[18px] font-semibold px-8 py-6 cursor-pointer rounded-br-none transition-all hover:bg-zinc-800",
               buttonClassName,
             )}
           >

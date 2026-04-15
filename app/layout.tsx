@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { gilroy } from "@/fonts/fonts";
-import "./globals.css";
 import Providers from "./providers";
 import { Toaster } from "@/components/ui/sonner";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Restaurant",

@@ -1,5 +1,5 @@
 import { Inbox } from "lucide-react";
-import { cn } from "@/lib/utils"; // Shadcn utility funksiyasi
+import { cn } from "@/lib/utils";
 
 interface EmptyStateProps {
   title?: string;

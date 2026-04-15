@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CartItem as CartItemType } from "@/types/index";
+import { useState } from "react";
 
 interface Props {
   item: CartItemType;
@@ -12,15 +13,22 @@ interface Props {
 }
 
 export default function CartItem({ item, onDelete, onUpdate }: Props) {
+  const [imgSrc, setImgSrc] = useState(
+    item?.product.image
+      ? `https://anorkhulov.uz/${item.product.image}`
+      : "/no-img.png",
+  );
+
   return (
     <div className="backdrop-blur-md bg-white/30 rounded-2xl p-4 flex items-center gap-6">
       <div className="relative w-24 h-24 shrink-0">
         <Image
-          src={`https://anorkhulov.uz/${item.product.image}`}
+          src={imgSrc}
           alt={item.product.name}
           fill
           sizes="w-full h-full"
           className="object-contain drop-shadow-lg rounded-2xl"
+          onError={() => setImgSrc("/no-img.png")}
         />
       </div>
 

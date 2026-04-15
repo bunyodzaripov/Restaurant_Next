@@ -44,7 +44,12 @@ export default function Footer() {
 
           <div className="flex items-center gap-3">
             {socials.map(({ icon: Icon, href }, i) => (
-              <Link key={i} href={href} className="text-black">
+              <Link
+                key={i}
+                href={href}
+                className="text-black"
+                aria-label={href}
+              >
                 <Icon size={20} strokeWidth={3.5} />
               </Link>
             ))}

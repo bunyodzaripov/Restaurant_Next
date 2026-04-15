@@ -38,6 +38,7 @@ export default function Topbar() {
             {currentLang?.flag}
           </span>
           <select
+            aria-label="Выберите язык"
             value={selectedLang}
             onChange={(e) => setSelectedLang(e.target.value)}
             className="pl-8 pr-6 py-1.5 rounded-md bg-transparent cursor-pointer outline-none appearance-none text-sm"
