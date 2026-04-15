@@ -14,8 +14,8 @@ interface Props {
 
 export default function CartItem({ item, onDelete, onUpdate }: Props) {
   const [imgSrc, setImgSrc] = useState(
-    item?.product.image
-      ? `https://anorkhulov.uz/${item.product.image}`
+    item?.product?.image
+      ? `https://anorkhulov.uz/${item?.product?.image}`
       : "/no-img.png",
   );
 
@@ -24,7 +24,7 @@ export default function CartItem({ item, onDelete, onUpdate }: Props) {
       <div className="relative w-24 h-24 shrink-0">
         <Image
           src={imgSrc}
-          alt={item.product.name}
+          alt={item?.product?.name}
           fill
           sizes="w-full h-full"
           className="object-contain drop-shadow-lg rounded-2xl"
