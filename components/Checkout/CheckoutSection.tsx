@@ -9,6 +9,7 @@ import { Home } from "lucide-react";
 import { Cart } from "@/types/index";
 import Title from "../common/Title";
 import { createOrder } from "@/service/cart";
+import { toast } from "sonner";
 
 interface Props {
   cart: Cart;
@@ -32,9 +33,9 @@ export default function CheckoutSection({ cart }: Props) {
         ],
       };
       await createOrder(payload);
-      alert("Buyurtma muvaffaqiyatli yaratildi");
+      toast.success("Order created");
     } catch (error) {
-      console.log(error);
+      toast.error("Something went wrong");
     }
   }
 

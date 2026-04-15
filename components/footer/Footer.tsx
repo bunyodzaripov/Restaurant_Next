@@ -1,11 +1,11 @@
 import Link from "next/link";
-import {
-  Send,
-  MessageCircle,
-  LucideSquareFunction,
-  DotSquareIcon,
-} from "lucide-react";
+import { Send } from "lucide-react";
 import Image from "next/image";
+import {
+  TwitterIcon,
+  FacebookIcon,
+  InstagramIcon,
+} from "@/components/common/icons";
 
 const services = [
   { label: "Цены", href: "#" },
@@ -22,9 +22,9 @@ const company = [
 
 const socials = [
   { icon: Send, href: "#" },
-  { icon: MessageCircle, href: "#" },
-  { icon: LucideSquareFunction, href: "#" },
-  { icon: DotSquareIcon, href: "#" },
+  { icon: TwitterIcon, href: "#" },
+  { icon: FacebookIcon, href: "#" },
+  { icon: InstagramIcon, href: "#" },
 ];
 
 export default function Footer() {

@@ -3,6 +3,7 @@
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { useGetAll } from "@/hooks/useGetAll";
 import { Categories } from "@/types";
+import { Loader2 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 export default function MenuContent() {
@@ -25,8 +26,6 @@ export default function MenuContent() {
     router.push(`/menu?${params.toString()}`);
   };
 
-  if (isLoading) return null;
-
   return (
     <div className="flex justify-center mb-10">
       <ToggleGroup
@@ -34,15 +33,23 @@ export default function MenuContent() {
         onValueChange={(val) => val && handleChange(val)}
         className="inline-flex items-center bg-white/30 backdrop-blur-sm rounded-full px-5 py-3"
       >
-        {data?.data?.map((item: Categories) => (
-          <ToggleGroupItem
-            key={item.id}
-            value={item.id.toString()}
-            className="px-5! py-2! rounded-[27px]! text-[20px] font-semibold! cursor-pointer"
-          >
-            {item.name}
-          </ToggleGroupItem>
-        ))}
+        {isLoading ? (
+          <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+        ) : data?.data && data.data.length > 0 ? (
+          data.data.map((item: Categories) => (
+            <ToggleGroupItem
+              key={item.id}
+              value={item.id.toString()}
+              className="px-5! py-2! rounded-[27px]! text-[20px] font-semibold! cursor-pointer"
+            >
+              {item.name}
+            </ToggleGroupItem>
+          ))
+        ) : (
+          <p className="text-muted-foreground text-sm py-2">
+            Данные не найдены
+          </p>
+        )}
       </ToggleGroup>
     </div>
   );

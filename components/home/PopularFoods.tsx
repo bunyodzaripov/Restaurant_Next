@@ -10,6 +10,7 @@ import ShadcnButton from "@/components/common/ShadcnButton";
 import { getAll } from "@/service/getAll";
 import { Products } from "@/types";
 import Title from "../common/Title";
+import EmptyState from "../common/EmptyState";
 
 export default async function PopularFoods() {
   const { data } = await getAll("products");
@@ -18,24 +19,37 @@ export default async function PopularFoods() {
     <section className="mt-16">
       <Title title="Популярные блюда" />
 
-      <Carousel opts={{ align: "start", loop: true }} className="relative">
-        <CarouselContent className="mt-14 pb-4">
-          {data?.map((item: Products) => (
-            <CarouselItem key={item.id} className="basis-1/4 pl-8">
-              <FoodCard
-                id={item.id}
-                image={item.image}
-                name={item.name}
-                description={item.description}
-                price={item.price}
-              />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
+      <div className="relative w-full">
+        {data?.length === 0 ? (
+          <EmptyState />
+        ) : (
+          <Carousel
+            opts={{ align: "start", loop: true }}
+            className="relative w-full"
+          >
+            <CarouselContent className="mt-14 pb-4">
+              {data.map((item: Products) => (
+                <CarouselItem key={item.id} className="basis-1/4 pl-8">
+                  <FoodCard
+                    id={item.id}
+                    image={item.image}
+                    name={item.name}
+                    description={item.description}
+                    price={item.price}
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
 
-        <CarouselPrevious className="-left-10 bg-white/40 border-white/50 hover:bg-white/60 backdrop-blur-sm" />
-        <CarouselNext className="-right-10 bg-white/40 border-white/50 hover:bg-white/60 backdrop-blur-sm" />
-      </Carousel>
+            {data.length > 1 && (
+              <>
+                <CarouselPrevious className="-left-10 bg-white/40 border-white/50 hover:bg-white/60 backdrop-blur-sm" />
+                <CarouselNext className="-right-10 bg-white/40 border-white/50 hover:bg-white/60 backdrop-blur-sm" />
+              </>
+            )}
+          </Carousel>
+        )}
+      </div>
 
       <div className="flex justify-end mt-21">
         <ShadcnButton label="Посмотреть меню" href="/menu" />

@@ -11,9 +11,13 @@ export const getAll = async (url: string) => {
 };
 
 export const getProducts = async (categoryId?: number | null) => {
-  const res = await api.get("/products", {
-    params: categoryId ? { categoryId } : {},
-  });
-
-  return res.data;
+  try {
+    const res = await api.get("/products", {
+      params: categoryId ? { categoryId } : {},
+    });
+    return res.data ? res.data : [];
+  } catch (error) {
+    console.error("Fetch products error:", error);
+    return [];
+  }
 };
