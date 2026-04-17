@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Loader2 } from "lucide-react";
 
 import CartItem from "./CartItem";
 import { Button } from "@/components/ui/button";
