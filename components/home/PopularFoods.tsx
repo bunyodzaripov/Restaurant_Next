@@ -13,7 +13,7 @@ import Title from "../common/Title";
 import EmptyState from "../common/EmptyState";
 
 export default async function PopularFoods() {
-  const { data } = await getAll("products");
+  const data = await getAll("products");
 
   return (
     <section className="mt-16">

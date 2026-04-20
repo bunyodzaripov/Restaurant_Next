@@ -5,7 +5,7 @@ import Title from "../common/Title";
 import EmptyState from "../common/EmptyState";
 
 export default async function GalleryGrid() {
-  const { data } = await getAll("galleries");
+  const data = await getAll("galleries");
 
   return (
     <section className="py-10">

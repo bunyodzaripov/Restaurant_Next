@@ -5,7 +5,7 @@ import Title from "../common/Title";
 import EmptyState from "../common/EmptyState";
 
 export default async function TeamSection() {
-  const { data } = await getAll("cook");
+  const data = await getAll("cook");
 
   return (
     <section className="mt-14.25">

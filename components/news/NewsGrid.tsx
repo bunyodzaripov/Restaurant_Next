@@ -5,7 +5,7 @@ import Title from "../common/Title";
 import EmptyState from "../common/EmptyState";
 
 export default async function NewsGrid() {
-  const { data } = await getAll("news");
+  const data = await getAll("news");
 
   return (
     <section className="py-10">
